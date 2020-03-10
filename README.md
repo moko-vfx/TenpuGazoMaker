@@ -7,7 +7,7 @@
 　こちらが本ツールの紹介記事になります。  
 　[https://effect.hatenablog.com/entry/TenpuGazoMaker](https://effect.hatenablog.com/entry/TenpuGazoMaker) 
 　  
-　使用時は ListFusen2_00.exe を実行してください。  
+　使用時は TenpuGazoMaker_v1.exe を実行してください。  
 　ツール上部のアイコンにカーソルを置くと説明文が表示されます。  
 　  
 　不具合報告は下記までお願いします。  
