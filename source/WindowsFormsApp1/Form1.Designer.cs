@@ -43,12 +43,14 @@
 			this.btnFrame = new System.Windows.Forms.Button();
 			this.btnUndo = new System.Windows.Forms.Button();
 			this.pnlBottom = new System.Windows.Forms.Panel();
+			this.pbLine = new System.Windows.Forms.PictureBox();
 			this.pbDraw = new System.Windows.Forms.PictureBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.lblSize = new System.Windows.Forms.Label();
 			this.pnlInfo = new System.Windows.Forms.Panel();
 			this.pnlTop.SuspendLayout();
 			this.pnlBottom.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbLine)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
 			this.pnlInfo.SuspendLayout();
 			this.SuspendLayout();
@@ -298,6 +300,7 @@
 			this.pnlBottom.AllowDrop = true;
 			this.pnlBottom.AutoScroll = true;
 			this.pnlBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(62)))), ((int)(((byte)(64)))));
+			this.pnlBottom.Controls.Add(this.pbLine);
 			this.pnlBottom.Controls.Add(this.pbDraw);
 			this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnlBottom.Location = new System.Drawing.Point(0, 40);
@@ -306,6 +309,21 @@
 			this.pnlBottom.TabIndex = 3;
 			this.pnlBottom.DragDrop += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragDrop);
 			this.pnlBottom.DragEnter += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragEnter);
+			// 
+			// pbLine
+			// 
+			this.pbLine.BackColor = System.Drawing.Color.Transparent;
+			this.pbLine.Location = new System.Drawing.Point(0, 0);
+			this.pbLine.Name = "pbLine";
+			this.pbLine.Size = new System.Drawing.Size(20, 20);
+			this.pbLine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pbLine.TabIndex = 1;
+			this.pbLine.TabStop = false;
+			this.pbLine.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseDown);
+			this.pbLine.MouseEnter += new System.EventHandler(this.PbLine_MouseEnter);
+			this.pbLine.MouseLeave += new System.EventHandler(this.PbLine_MouseLeave);
+			this.pbLine.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseMove);
+			this.pbLine.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseUp);
 			// 
 			// pbDraw
 			// 
@@ -319,11 +337,6 @@
 			this.pbDraw.SizeChanged += new System.EventHandler(this.PbDraw_SizeChanged);
 			this.pbDraw.DragDrop += new System.Windows.Forms.DragEventHandler(this.PbDraw_DragDrop);
 			this.pbDraw.DragEnter += new System.Windows.Forms.DragEventHandler(this.PbDraw_DragEnter);
-			this.pbDraw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbDraw_MouseDown);
-			this.pbDraw.MouseEnter += new System.EventHandler(this.PbDraw_MouseEnter);
-			this.pbDraw.MouseLeave += new System.EventHandler(this.PbDraw_MouseLeave);
-			this.pbDraw.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbDraw_MouseMove);
-			this.pbDraw.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbDraw_MouseUp);
 			// 
 			// lblSize
 			// 
@@ -359,13 +372,14 @@
 			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(435, 100);
 			this.Name = "Form1";
-			this.Text = "Tenpu Gazo Maker v.1.0";
+			this.Text = "Tenpu Gazo Maker v.1.01";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
 			this.pnlTop.ResumeLayout(false);
 			this.pnlBottom.ResumeLayout(false);
 			this.pnlBottom.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbLine)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbDraw)).EndInit();
 			this.pnlInfo.ResumeLayout(false);
 			this.pnlInfo.PerformLayout();
@@ -392,6 +406,7 @@
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.Label lblSize;
 		private System.Windows.Forms.Panel pnlInfo;
+		private System.Windows.Forms.PictureBox pbLine;
 	}
 }
 

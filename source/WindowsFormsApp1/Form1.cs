@@ -25,11 +25,11 @@ namespace WindowsFormsApp1
 		// 変数：デリゲート
 		EditPicture EditMethod;
 
-		// 変数：Undo用のバッファ
+		// 変数：Undo/Redo用のバッファ
 		Image imgOld = null;
 		Image imgNow = null;
 
-		// 変数：選択範囲
+		// 変数：選択範囲の描画
 		bool lineMode = false;
 		bool selecting = false;
 
@@ -38,10 +38,10 @@ namespace WindowsFormsApp1
 		Point p0, p1, p2, p3;
 
 		Color selectColor = Color.FromArgb(220, 80, 40);
+		int selectBorder = 2;
+		Bitmap bm;
 		Graphics g;
 		Pen linePen;
-
-		Bitmap bm;
 
 
 		//******************************//
@@ -68,6 +68,10 @@ namespace WindowsFormsApp1
 
 			// PictureBoxにドラッグ＆ドロップを許可
 			pbDraw.AllowDrop = true;
+			//pbLine.AllowDrop = true;
+
+			// ライン描画PictureBoxの親を背景PictureBoxに設定
+			pbLine.Parent = pbDraw;
 		}
 
 		// 終了時に実行
@@ -103,21 +107,21 @@ namespace WindowsFormsApp1
 		private void BtnTrim_Click(object sender, EventArgs e)
 		{
 			EditMethod = TrimPicture;
-			CheckPicture(EditMethod, 1, 1);
+			CheckPicture(EditMethod, 1, 1, true);
 		}
 		
 		// ボタン：枠線描画
 		private void BtnFrame_Click(object sender, EventArgs e)
 		{
 			EditMethod = DrawFrame;
-			CheckPicture(EditMethod, 1, 1);
+			CheckPicture(EditMethod, 1, 1, false);
 		}
 
 		// ボタン：矩形ライン描画
 		private void BtnQuad_Click(object sender, EventArgs e)
 		{
 			EditMethod = DrawQuad;
-			CheckPicture(EditMethod, 1, 1);
+			CheckPicture(EditMethod, 1, 1, true);
 		}
 		
 		// ボタン：ライン描画
@@ -148,7 +152,7 @@ namespace WindowsFormsApp1
 		private void BtnClose_Click(object sender, EventArgs e)
 		{
 			EditMethod = ClosePicture;
-			CheckPicture(EditMethod, 1, 1);
+			CheckPicture(EditMethod, 1, 1, true);
 		}
 
 		// ボタン：設定
@@ -164,7 +168,7 @@ namespace WindowsFormsApp1
 		//******************************//
 
 		// マウス：ドラッグ開始
-		private void PbDraw_MouseDown(object sender, MouseEventArgs e)
+		private void PbLine_MouseDown(object sender, MouseEventArgs e)
 		{
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
@@ -173,16 +177,18 @@ namespace WindowsFormsApp1
 				staPoint.X = cursorPos().X;
 				staPoint.Y = cursorPos().Y;
 
+				// 描画するImageオブジェクトを作成
+				// サイズだけ指定すると無色透明のキャンバスになる
+				bm = new Bitmap(pbDraw.Width, pbDraw.Height);
+
+				// ImageオブジェクトのGraphicsオブジェクトを作成
+				g = Graphics.FromImage(bm);
+
 				// ライン描画モード時
 				if (lineMode)
 				{
 					// Undoのための画像バックアップ(Old)
 					BackupImageOld();
-
-					// 描画するImageオブジェクトを作成
-					bm = new Bitmap(imgNow);
-					//ImageオブジェクトのGraphicsオブジェクトを作成する
-					g = Graphics.FromImage(bm);
 
 					// Penオブジェクトの作成
 					linePen = new Pen(Settings.lineColor, Settings.lineBorder);
@@ -192,11 +198,12 @@ namespace WindowsFormsApp1
 					{
 						int i = Settings.lineBorder;
 
-						// 矢印を描画する
+						// ラインに矢印を設定する
 						linePen.CustomEndCap = new AdjustableArrowCap(3, 3);
 					}
 					else
 					{
+						// ラインの矢印を除去する
 						linePen.EndCap = LineCap.NoAnchor;
 					}
 
@@ -206,12 +213,8 @@ namespace WindowsFormsApp1
 				// 選択範囲モード時
 				else
 				{
-					// 描画するImageオブジェクトを作成
-					// サイズだけ指定すると無色透明のキャンバスになる
-					bm = new Bitmap(pbDraw.Width, pbDraw.Height);
-
 					// Penオブジェクトの作成
-					linePen = new Pen(selectColor, 2);
+					linePen = new Pen(selectColor, selectBorder);
 
 					// スタイルを指定
 					linePen.DashStyle = DashStyle.Dot;
@@ -220,7 +223,7 @@ namespace WindowsFormsApp1
 		}
 
 		// マウス：ドラッグ中
-		private void PbDraw_MouseMove(object sender, MouseEventArgs e)
+		private void PbLine_MouseMove(object sender, MouseEventArgs e)
 		{
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
@@ -294,7 +297,7 @@ namespace WindowsFormsApp1
 						}
 
 						// 描画
-						DrawLine(bm);
+						DrawLine();
 					}
 				}
 				// 選択範囲モード時
@@ -336,28 +339,35 @@ namespace WindowsFormsApp1
 						}
 
 						// 選択範囲の描画
-						DrawSelect(bm);
-					}					
-				}				
+						DrawSelect();
+					}
+				}
 			}
 		}
 
 		// マウス：ドラッグ終了
-		private void PbDraw_MouseUp(object sender, MouseEventArgs e)
+		private void PbLine_MouseUp(object sender, MouseEventArgs e)
 		{
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
 			{
-				// リソースを解放
-				linePen.Dispose();
-				g.Dispose();
-				bm = null;
-
 				// ライン描画モード時
 				if (lineMode)
 				{
+					// 先にバックアップ画像で塗り潰す
+					g.DrawImage(imgNow, 0, 0);
+
+					// ラインを描画
+					g.DrawLine(linePen, staPoint, endPoint);
+
+					// ライン描画PictureBoxに表示
+					pbDraw.Image = bm;
+
 					// Undoのための画像バックアップ(Now)
 					BackupImageNow();
+
+					// 選択範囲の描画をクリア
+					pbLine.Image = null;
 				}
 				// 選択範囲モード時
 				else
@@ -408,8 +418,9 @@ namespace WindowsFormsApp1
 			}
 		}
 
+
 		// マウス：PictureBox内に入った時
-		private void PbDraw_MouseEnter(object sender, EventArgs e)
+		private void PbLine_MouseEnter(object sender, EventArgs e)
 		{
 			// カーソルを変える
 			if (lineMode)
@@ -417,9 +428,9 @@ namespace WindowsFormsApp1
 				pbDraw.Cursor = Cursors.Cross;
 			}
 		}
-		
+
 		// マウス：PictureBox内から出た時
-		private void PbDraw_MouseLeave(object sender, EventArgs e)
+		private void PbLine_MouseLeave(object sender, EventArgs e)
 		{
 			// カーソルを元に戻す
 			if (lineMode)
@@ -427,6 +438,7 @@ namespace WindowsFormsApp1
 				pbDraw.Cursor = Cursors.Default;
 			}
 		}
+
 
 		// パネルへのドラッグ
 		private void PnlBottom_DragEnter(object sender, DragEventArgs e)
@@ -463,6 +475,9 @@ namespace WindowsFormsApp1
 
 				// Undoのための画像バックアップ(Now)
 				BackupImageNow();
+
+				// 選択範囲やライン描画周りの片付け
+				CleanDrawSettings(true);
 			}
 			catch (Exception)
 			{
@@ -506,6 +521,9 @@ namespace WindowsFormsApp1
 
 				// Undoのための画像バックアップ(Now)
 				BackupImageNow();
+
+				// 選択範囲やライン描画周りの片付け
+				CleanDrawSettings(true);
 			}
 			catch (Exception)
 			{
@@ -514,14 +532,19 @@ namespace WindowsFormsApp1
 			}
 		}
 
-		// イベント：PixtureBoxのサイズが変わったタイミング
+		// イベント：PixtureBox1のサイズが変わったタイミング
 		private void PbDraw_SizeChanged(object sender, EventArgs e)
 		{
-			// PixtureBoxのサイズを表示
+			// PixtureBox1のサイズを表示
 			lblSize.Text = "Image Size : W " +
 				pbDraw.Width.ToString() + " / H " +
 				pbDraw.Height.ToString();
+
+			// ライン描画PictureBoxを同じサイズにする
+			pbLine.Width = pbDraw.Width;
+			pbLine.Height = pbDraw.Height;
 		}
+
 
 		//******************************//
 		//								//
@@ -548,21 +571,21 @@ namespace WindowsFormsApp1
 			if (e.Control && e.KeyCode == Keys.T)
 			{
 				EditMethod = TrimPicture;
-				CheckPicture(EditMethod, 1, 1);
+				CheckPicture(EditMethod, 1, 1, true);
 			}
 
 			// 枠描画
 			if (e.Control && e.KeyCode == Keys.F)
 			{
 				EditMethod = DrawFrame;
-				CheckPicture(EditMethod, 1, 1);
+				CheckPicture(EditMethod, 1, 1, false);
 			}
 
 			// 矩形ライン描画
 			if (e.Control && e.KeyCode == Keys.Q)
 			{
 				EditMethod = DrawQuad;
-				CheckPicture(EditMethod, 1, 1);
+				CheckPicture(EditMethod, 1, 1, true);
 			}
 
 			// ライン描画
@@ -593,9 +616,10 @@ namespace WindowsFormsApp1
 			if (e.Control && e.KeyCode == Keys.W)
 			{
 				EditMethod = ClosePicture;
-				CheckPicture(EditMethod, 1, 1);
+				CheckPicture(EditMethod, 1, 1, true);
 			}
 		}
+
 
 		//******************************//
 		//								//
@@ -657,17 +681,8 @@ namespace WindowsFormsApp1
 				// Undoのための画像バックアップ(Now)
 				BackupImageNow();
 
-				// 選択範囲フラグOFF
-				selecting = false;
-
-				// ライン描画モード解除
-				lineMode = false;
-
-				// アイコン差し替え
-				btnLine.BackgroundImage = Properties.Resources.icon_Line;
-
-				// 矩形選択を閉じる
-				//frame.Close();
+				// 選択範囲やライン描画周りの片付け
+				CleanDrawSettings(true);
 			}
 			else // 無い場合
 			{
@@ -687,14 +702,8 @@ namespace WindowsFormsApp1
 						// Undoのための画像バックアップ(Now)
 						BackupImageNow();
 
-						// 選択範囲フラグOFF
-						selecting = false;
-
-						// ライン描画モード解除
-						lineMode = false;
-
-						// アイコン差し替え
-						btnLine.BackgroundImage = Properties.Resources.icon_Line;
+						// 選択範囲やライン描画周りの片付け
+						CleanDrawSettings(true);
 					}
 				}
 				else
@@ -717,7 +726,7 @@ namespace WindowsFormsApp1
 				// サイズだけ指定すると無色透明のキャンバスになる
 				Bitmap canvas = new Bitmap(sizeX, sizeY);
 				//ImageオブジェクトのGraphicsオブジェクトを作成する
-				g = Graphics.FromImage(canvas);
+				Graphics g2 = Graphics.FromImage(canvas);
 
 				// 画像のバックアップからImageを作成
 				Bitmap img = new Bitmap(imgNow);
@@ -729,10 +738,10 @@ namespace WindowsFormsApp1
 				Rectangle desRect = new Rectangle(0, 0, srcRect.Width, srcRect.Height);
 
 				// 画像の一部を描画
-				g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel);
+				g2.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel);
 
 				// リソースを解放
-				g.Dispose();
+				g2.Dispose();
 
 				// PictureBoxに表示
 				pbDraw.Image = canvas;
@@ -749,28 +758,28 @@ namespace WindowsFormsApp1
 			Bitmap canvas = new Bitmap(imgNow);
 
 			// ImageオブジェクトのGraphicsオブジェクトを作成する
-			Graphics g = Graphics.FromImage(canvas);
+			Graphics g2 = Graphics.FromImage(canvas);
 
 			// Penオブジェクトの作成
 			SolidBrush sb = new SolidBrush(Settings.frameColor);
 			int ib = Settings.frameBorder;
 
 			// グレーの枠線を引く
-			g.FillRectangle(sb, 0, 0,
+			g2.FillRectangle(sb, 0, 0,
 							pbDraw.Width, ib); // 上辺
 
-			g.FillRectangle(sb, 0, pbDraw.Height - ib,
+			g2.FillRectangle(sb, 0, pbDraw.Height - ib,
 							pbDraw.Width, ib); // 底辺
 
-			g.FillRectangle(sb, 0, 0,
+			g2.FillRectangle(sb, 0, 0,
 							ib, pbDraw.Height); // 左辺
 
-			g.FillRectangle(sb, pbDraw.Width - ib, 0,
+			g2.FillRectangle(sb, pbDraw.Width - ib, 0,
 							ib, pbDraw.Height); //　右辺
 
 			// リソースを解放する
 			sb.Dispose();
-			g.Dispose();
+			g2.Dispose();
 
 			// PictureBoxに表示する
 			pbDraw.Image = canvas;
@@ -785,7 +794,7 @@ namespace WindowsFormsApp1
 				// サイズだけ指定すると無色透明のキャンバスになる
 				Bitmap canvas = new Bitmap(imgNow);
 				//ImageオブジェクトのGraphicsオブジェクトを作成する
-				g = Graphics.FromImage(canvas);
+				Graphics g2 = Graphics.FromImage(canvas);
 
 				// Penオブジェクトの作成
 				linePen = new Pen(Settings.lineColor, Settings.lineBorder);
@@ -797,10 +806,13 @@ namespace WindowsFormsApp1
 				initialize4Point();
 
 				// ラインを描画
-				g.DrawLine(linePen, p0, p1); // 上辺
-				g.DrawLine(linePen, p2, p3); // 底辺
-				g.DrawLine(linePen, p0, p2); // 左辺
-				g.DrawLine(linePen, p1, p3); // 右辺
+				g2.DrawLine(linePen, p0, p1); // 上辺
+				g2.DrawLine(linePen, p2, p3); // 底辺
+				g2.DrawLine(linePen, p0, p2); // 左辺
+				g2.DrawLine(linePen, p1, p3); // 右辺
+
+				// リソースを解放
+				g2.Dispose();
 
 				// PictureBox1に表示
 				pbDraw.Image = canvas;
@@ -811,26 +823,23 @@ namespace WindowsFormsApp1
 			}
 		}
 
-		private void DrawLine(Bitmap canvas)
+		private void DrawLine()
 		{
-			// 先にバックアップ画像で塗り潰す
-			g.DrawImage(imgNow, 0, 0);
+			// 前回のライン描画を一旦クリア
+			g.Clear(Color.Transparent);
 
 			// ラインを描画
 			g.DrawLine(linePen, staPoint, endPoint);
 
-			// PictureBox1に表示
-			pbDraw.Image = canvas;
+			// ライン描画PictureBoxに表示
+			pbLine.Image = bm;
 		}
 
 		// 関数：選択範囲を描画
-		private void DrawSelect(Bitmap canvas)
+		private void DrawSelect()
 		{
-			// ImageオブジェクトのGraphicsオブジェクトを作成
-			g = Graphics.FromImage(bm);
-
-			// 先にバックアップ画像で塗り潰す
-			g.DrawImage(imgNow, 0, 0);
+			// 前回のライン描画を一旦クリア
+			g.Clear(Color.Transparent);
 
 			// 選択範囲が画像の領域内に収まるようClamp
 			posClamp();
@@ -844,12 +853,8 @@ namespace WindowsFormsApp1
 			g.DrawLine(linePen, p0, p2); // 左辺
 			g.DrawLine(linePen, p1, p3); // 右辺
 
-			// PictureBox1に表示
-			pbDraw.Image = canvas;
-
-			// リソースを解放
-			// ドラッグ終了にも解放が入っているが毎フレーム解放した方が良さそう
-			g.Dispose();
+			// ライン描画PictureBoxに表示
+			pbLine.Image = bm;
 		}
 
 		private void ChangeLineMode()
@@ -858,25 +863,25 @@ namespace WindowsFormsApp1
 			if (pbDraw.Image != null) // ある場合
 			{
 				// ライン描画モードの切り替えのみ行う
-				if (lineMode)
+				if (lineMode) // ON → OFF
 				{
 					lineMode = false;
 
 					// アイコン差し替え
 					btnLine.BackgroundImage = Properties.Resources.icon_Line;
 				}
-				else
+				else // OFF → ON
 				{
 					lineMode = true;
 
 					// アイコン差し替え
 					btnLine.BackgroundImage = Properties.Resources.icon_Line_On;
 
-					// PictureBoxに復元
-					pbDraw.Image = imgNow;
-
 					// 選択範囲フラグOFF
 					selecting = false;
+
+					// 選択範囲の描画をクリア
+					pbLine.Image = null;
 				}
 			}
 			else // 無い場合
@@ -889,7 +894,7 @@ namespace WindowsFormsApp1
 		private void Undo()
 		{
 			// 一時保存
-			Image temp = imgOld;
+			Image temp = imgOld; // tempを解放してはいけない（エラーが出る）
 
 			// バックアップ
 			imgOld = imgNow;
@@ -902,6 +907,9 @@ namespace WindowsFormsApp1
 
 			// 選択範囲フラグOFF
 			selecting = false;
+
+			// 選択範囲の描画をクリア
+			pbLine.Image = null;
 		}
 
 		private void CopyToClipboard()
@@ -991,7 +999,7 @@ namespace WindowsFormsApp1
 		}
 
 		// 関数：ツール上に画像があるかどうか判定してデリゲートを実行
-		private void CheckPicture(EditPicture E, int i1, int i2)
+		private void CheckPicture(EditPicture E, int i1, int i2, bool selectOff)
 		{
 			// PictureBoxにある画像の取得
 			if (pbDraw.Image != null) // ある場合
@@ -1011,14 +1019,8 @@ namespace WindowsFormsApp1
 					BackupImageNow();
 				}
 
-				// 選択範囲フラグOFF
-				selecting = false;
-
-				// ライン描画モード解除
-				lineMode = false;
-
-				// アイコン差し替え
-				btnLine.BackgroundImage = Properties.Resources.icon_Line;
+				// 選択範囲やライン描画周りの片付け
+				CleanDrawSettings(selectOff);
 			}
 			else // 無い場合
 			{
@@ -1029,6 +1031,26 @@ namespace WindowsFormsApp1
 
 		// デリゲート：画像を編集する関数
 		delegate void EditPicture();
+
+		// 関数：選択範囲やライン描画周りの片付け
+		private void CleanDrawSettings(bool selectOff)
+		{
+			// ライン描画モード解除
+			lineMode = false;
+
+			// ライン描画モードのアイコン差し替え
+			btnLine.BackgroundImage = Properties.Resources.icon_Line;
+
+			// 選択範囲を解除する場合
+			if (selectOff)
+			{
+				// 選択範囲フラグOFF
+				selecting = false;
+
+				// 選択範囲の描画をクリア
+				pbLine.Image = null;
+			}
+		}
 
 		// 関数：枠線フォームを作成
 		private Image GetCaptureImage(Rectangle rect)
@@ -1059,7 +1081,7 @@ namespace WindowsFormsApp1
 			// 画面座標でカーソルの位置を取得
 			Point p = Cursor.Position;
 			// 画面座標からコントロール上の座標に変換
-			Point cp = pbDraw.PointToClient(p);
+			Point cp = pbLine.PointToClient(p);
 
 			return cp;
 		}
