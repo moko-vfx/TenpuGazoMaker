@@ -67,8 +67,7 @@ namespace WindowsFormsApp1
 			this.Height = Settings.formSizeY;
 
 			// カラーラベルに色を反映
-			pnlColor1.BackColor = Settings.frameColor;
-			pnlColor2.BackColor = Settings.lineColor;
+			RefreshColor();
 
 			// PictureBoxにドラッグ＆ドロップを許可
 			pbDraw.AllowDrop = true;
@@ -1023,6 +1022,9 @@ namespace WindowsFormsApp1
 
 					// 設定を出力
 					Settings.OutputSettings();
+
+					// カラーラベルに色を反映
+					RefreshColor();
 				}
 			}
 			catch (Exception)
@@ -1157,6 +1159,13 @@ namespace WindowsFormsApp1
 			p1 = new Point(endPoint.X, staPoint.Y); // 底辺
 			p2 = new Point(staPoint.X, endPoint.Y); // 左辺
 			p3 = new Point(endPoint.X, endPoint.Y); // 右辺
+		}
+
+		// 関数：カラーラベルに色を反映
+		private void RefreshColor()
+		{
+			pnlColor1.BackColor = Settings.frameColor;
+			pnlColor2.BackColor = Settings.lineColor;
 		}
 	}
 
