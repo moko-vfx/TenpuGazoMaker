@@ -66,6 +66,10 @@ namespace WindowsFormsApp1
 			this.Width = Settings.formSizeX;
 			this.Height = Settings.formSizeY;
 
+			// カラーラベルに色を反映
+			pnlColor1.BackColor = Settings.frameColor;
+			pnlColor2.BackColor = Settings.lineColor;
+
 			// PictureBoxにドラッグ＆ドロップを許可
 			pbDraw.AllowDrop = true;
 			//pbLine.AllowDrop = true;
@@ -91,7 +95,7 @@ namespace WindowsFormsApp1
 		//								//
 		//******************************//
 
-		// ボタン：デスクトップのキャプチャ枠表示
+		// ボタン：デスクトップのキャプチャフレーム表示
 		private void BtnCapture_Click(object sender, EventArgs e)
 		{
 			ViewCaptureFrame();
@@ -187,6 +191,10 @@ namespace WindowsFormsApp1
 				// ライン描画モード時
 				if (lineMode)
 				{
+					// ドラッグしなかった時のために一旦座標を取得
+					endPoint.X = cursorPos().X;
+					endPoint.Y = cursorPos().Y;
+
 					// Undoのための画像バックアップ(Old)
 					BackupImageOld();
 
@@ -357,8 +365,14 @@ namespace WindowsFormsApp1
 					// 先にバックアップ画像で塗り潰す
 					g.DrawImage(imgNow, 0, 0);
 
+					// 今だけアンチエイリアスに設定
+					g.SmoothingMode = SmoothingMode.AntiAlias;
+
 					// ラインを描画
 					g.DrawLine(linePen, staPoint, endPoint);
+
+					// アンチエイリアス無しに戻す
+					g.SmoothingMode = SmoothingMode.None;
 
 					// ライン描画PictureBoxに表示
 					pbDraw.Image = bm;
@@ -555,16 +569,22 @@ namespace WindowsFormsApp1
 		// 全てのショートカットをフォームが受け取って実行する
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
-			// キャプチャ枠の表示
+			// キャプチャフレームの表示
 			if (e.Control && e.KeyCode == Keys.A)
 			{
 				ViewCaptureFrame();
 			}
 
-			// 画像貼り付け
-			if (e.Control && e.KeyCode == Keys.V)
+			// キャプチャフレームから画像を取り込む
+			if (e.Control && e.KeyCode == Keys.D)
 			{
 				GetPicture();
+			}
+
+			// クリップボードから画像を取り込む
+			if (e.Control && e.KeyCode == Keys.V)
+			{
+				GetPicFromCB();
 			}
 
 			// トリミング
@@ -618,6 +638,12 @@ namespace WindowsFormsApp1
 				EditMethod = ClosePicture;
 				CheckPicture(EditMethod, 1, 1, true);
 			}
+
+			// 設定を開く
+			if (e.KeyCode == Keys.Escape)
+			{
+				OpenSetting();
+			}
 		}
 
 
@@ -660,6 +686,7 @@ namespace WindowsFormsApp1
 			}
 		}
 
+		// キャプチャフレームから取り込み
 		private void GetPicture()
 		{
 			// frameフォームの存在チェック
@@ -709,6 +736,31 @@ namespace WindowsFormsApp1
 				else
 				{
 					MessageBox.Show("範囲選択するかクリップボードに画像を保存してください");
+				}
+			}
+		}
+
+		// クリップボードから取り込み
+		private void GetPicFromCB()
+		{
+			//クリップボードにBitmapデータがあるか調べる
+			if (Clipboard.ContainsImage())
+			{
+				//クリップボードにあるデータの取得
+				Image img = Clipboard.GetImage();
+				if (img != null)
+				{
+					// Undoのための画像バックアップ(Old)
+					BackupImageOld();
+
+					// PixtureBoxに表示
+					pbDraw.Image = img;
+
+					// Undoのための画像バックアップ(Now)
+					BackupImageNow();
+
+					// 選択範囲やライン描画周りの片付け
+					CleanDrawSettings(true);
 				}
 			}
 		}
@@ -942,7 +994,7 @@ namespace WindowsFormsApp1
 
 			// オーナーウィンドウの真ん中に表示
 			form.StartPosition = FormStartPosition.Manual;
-			form.Location = new Point(this.Location.X + 33, this.Location.Y + 70);
+			form.Location = new Point(this.Location.X + 30, this.Location.Y + 50);
 			// 設定フォームをタスクバーに表示しない
 			form.ShowInTaskbar = false;
 

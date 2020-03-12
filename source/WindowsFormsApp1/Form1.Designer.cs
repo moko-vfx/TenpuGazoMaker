@@ -48,6 +48,8 @@
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.lblSize = new System.Windows.Forms.Label();
 			this.pnlInfo = new System.Windows.Forms.Panel();
+			this.pnlColor2 = new System.Windows.Forms.Panel();
+			this.pnlColor1 = new System.Windows.Forms.Panel();
 			this.pnlTop.SuspendLayout();
 			this.pnlBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbLine)).BeginInit();
@@ -57,7 +59,7 @@
 			// 
 			// pnlTop
 			// 
-			this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(44)))));
+			this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.pnlTop.Controls.Add(this.btnCapture);
 			this.pnlTop.Controls.Add(this.btnTrim);
 			this.pnlTop.Controls.Add(this.btnView);
@@ -77,7 +79,7 @@
 			// 
 			// btnCapture
 			// 
-			this.btnCapture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnCapture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnCapture.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Capture;
 			this.btnCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnCapture.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -97,7 +99,7 @@
 			// 
 			// btnTrim
 			// 
-			this.btnTrim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnTrim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnTrim.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Trim;
 			this.btnTrim.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnTrim.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -117,7 +119,7 @@
 			// 
 			// btnView
 			// 
-			this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnView.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_View;
 			this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -131,13 +133,14 @@
 			this.btnView.Size = new System.Drawing.Size(23, 23);
 			this.btnView.TabIndex = 0;
 			this.btnView.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnView, "キャプチャ枠を表示していれば枠内の背景を‥\r\n無ければクリップボードの画像をツールに貼り付けます。\r\n[ ショートカットキー：Ctrl + V ]");
+			this.toolTip1.SetToolTip(this.btnView, "キャプチャ枠を表示していれば枠内の背景をツールに取り込みます。\r\n[ ショートカットキー：Ctrl + D ]\r\n\r\n画像を直接ドラッグ＆ドロップしてもOKです。" +
+        "\r\nまた、「Ctrl + V」でクリップボードの画像をツールに貼り付けます。");
 			this.btnView.UseVisualStyleBackColor = false;
 			this.btnView.Click += new System.EventHandler(this.BtnView_Click);
 			// 
 			// btnSave
 			// 
-			this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSave.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Save;
 			this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -157,7 +160,7 @@
 			// 
 			// btnLine
 			// 
-			this.btnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnLine.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Line;
 			this.btnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -171,13 +174,13 @@
 			this.btnLine.Size = new System.Drawing.Size(23, 23);
 			this.btnLine.TabIndex = 0;
 			this.btnLine.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnLine, "画像上の選択範囲に枠線を描画します。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + L ]");
+			this.toolTip1.SetToolTip(this.btnLine, "画像上でラインを引くモードになります。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + L ]");
 			this.btnLine.UseVisualStyleBackColor = false;
 			this.btnLine.Click += new System.EventHandler(this.BtnLine_Click);
 			// 
 			// btnSetting
 			// 
-			this.btnSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSetting.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Set;
 			this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnSetting.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -191,13 +194,13 @@
 			this.btnSetting.Size = new System.Drawing.Size(23, 23);
 			this.btnSetting.TabIndex = 0;
 			this.btnSetting.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnSetting, "設定画面を開きます。");
+			this.toolTip1.SetToolTip(this.btnSetting, "設定画面を開きます。\r\n[ ショートカットキー：Esc ]");
 			this.btnSetting.UseVisualStyleBackColor = false;
 			this.btnSetting.Click += new System.EventHandler(this.BtnSetting_Click);
 			// 
 			// btnClose
 			// 
-			this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnClose.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Close;
 			this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -211,13 +214,13 @@
 			this.btnClose.Size = new System.Drawing.Size(23, 23);
 			this.btnClose.TabIndex = 0;
 			this.btnClose.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnClose, "画像をクリアします。\r\n[ ショートカットキー：Ctrl + W ]");
+			this.toolTip1.SetToolTip(this.btnClose, "ツール上の画像をクリアします。\r\n[ ショートカットキー：Ctrl + W ]");
 			this.btnClose.UseVisualStyleBackColor = false;
 			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
 			// 
 			// btnQuad
 			// 
-			this.btnQuad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnQuad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnQuad.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Quad;
 			this.btnQuad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnQuad.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -231,13 +234,13 @@
 			this.btnQuad.Size = new System.Drawing.Size(23, 23);
 			this.btnQuad.TabIndex = 0;
 			this.btnQuad.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnQuad, "画像上で横線を引くモードになります。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + Q ]");
+			this.toolTip1.SetToolTip(this.btnQuad, "画像上の選択範囲に枠線を描画します。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + Q ]");
 			this.btnQuad.UseVisualStyleBackColor = false;
 			this.btnQuad.Click += new System.EventHandler(this.BtnQuad_Click);
 			// 
 			// btnCopy
 			// 
-			this.btnCopy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnCopy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnCopy.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Copy;
 			this.btnCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnCopy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -257,7 +260,7 @@
 			// 
 			// btnFrame
 			// 
-			this.btnFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnFrame.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Frame;
 			this.btnFrame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnFrame.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -277,7 +280,7 @@
 			// 
 			// btnUndo
 			// 
-			this.btnUndo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnUndo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnUndo.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Undo;
 			this.btnUndo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnUndo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
@@ -291,7 +294,7 @@
 			this.btnUndo.Size = new System.Drawing.Size(23, 23);
 			this.btnUndo.TabIndex = 0;
 			this.btnUndo.TabStop = false;
-			this.toolTip1.SetToolTip(this.btnUndo, "ツール上の画像に対してUndo/Redoします。\r\n[ ショートカットキー：Ctrl + Z ]");
+			this.toolTip1.SetToolTip(this.btnUndo, "ツール上の画像の編集に対してUndo/Redoします。\r\n[ ショートカットキー：Ctrl + Z ]");
 			this.btnUndo.UseVisualStyleBackColor = false;
 			this.btnUndo.Click += new System.EventHandler(this.BtnUndo_Click);
 			// 
@@ -299,13 +302,13 @@
 			// 
 			this.pnlBottom.AllowDrop = true;
 			this.pnlBottom.AutoScroll = true;
-			this.pnlBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(62)))), ((int)(((byte)(64)))));
+			this.pnlBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(60)))), ((int)(((byte)(61)))));
 			this.pnlBottom.Controls.Add(this.pbLine);
 			this.pnlBottom.Controls.Add(this.pbDraw);
 			this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnlBottom.Location = new System.Drawing.Point(0, 40);
 			this.pnlBottom.Name = "pnlBottom";
-			this.pnlBottom.Size = new System.Drawing.Size(419, 181);
+			this.pnlBottom.Size = new System.Drawing.Size(419, 159);
 			this.pnlBottom.TabIndex = 3;
 			this.pnlBottom.DragDrop += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragDrop);
 			this.pnlBottom.DragEnter += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragEnter);
@@ -342,7 +345,7 @@
 			// 
 			this.lblSize.AutoSize = true;
 			this.lblSize.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.lblSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(143)))));
+			this.lblSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(145)))), ((int)(((byte)(142)))));
 			this.lblSize.Location = new System.Drawing.Point(7, 3);
 			this.lblSize.Name = "lblSize";
 			this.lblSize.Size = new System.Drawing.Size(83, 18);
@@ -351,7 +354,9 @@
 			// 
 			// pnlInfo
 			// 
-			this.pnlInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(44)))));
+			this.pnlInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.pnlInfo.Controls.Add(this.pnlColor2);
+			this.pnlInfo.Controls.Add(this.pnlColor1);
 			this.pnlInfo.Controls.Add(this.lblSize);
 			this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnlInfo.Location = new System.Drawing.Point(0, 199);
@@ -359,20 +364,38 @@
 			this.pnlInfo.Size = new System.Drawing.Size(419, 22);
 			this.pnlInfo.TabIndex = 4;
 			// 
+			// pnlColor2
+			// 
+			this.pnlColor2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnlColor2.BackColor = System.Drawing.Color.OrangeRed;
+			this.pnlColor2.Location = new System.Drawing.Point(398, 7);
+			this.pnlColor2.Name = "pnlColor2";
+			this.pnlColor2.Size = new System.Drawing.Size(9, 9);
+			this.pnlColor2.TabIndex = 1;
+			// 
+			// pnlColor1
+			// 
+			this.pnlColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnlColor1.BackColor = System.Drawing.Color.Silver;
+			this.pnlColor1.Location = new System.Drawing.Point(382, 7);
+			this.pnlColor1.Name = "pnlColor1";
+			this.pnlColor1.Size = new System.Drawing.Size(9, 9);
+			this.pnlColor1.TabIndex = 1;
+			// 
 			// Form1
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(419, 221);
-			this.Controls.Add(this.pnlInfo);
 			this.Controls.Add(this.pnlBottom);
 			this.Controls.Add(this.pnlTop);
+			this.Controls.Add(this.pnlInfo);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(435, 100);
 			this.Name = "Form1";
-			this.Text = "Tenpu Gazo Maker v.1.01";
+			this.Text = "Tenpu Gazo Maker v.1.02";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -407,6 +430,8 @@
 		private System.Windows.Forms.Label lblSize;
 		private System.Windows.Forms.Panel pnlInfo;
 		private System.Windows.Forms.PictureBox pbLine;
+		private System.Windows.Forms.Panel pnlColor2;
+		private System.Windows.Forms.Panel pnlColor1;
 	}
 }
 
