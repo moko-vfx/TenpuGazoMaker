@@ -29,6 +29,12 @@ namespace WindowsFormsApp1
 		Image imgOld = null;
 		Image imgNow = null;
 
+		// 変数：パンツール
+		bool isDragging = false;
+		bool isDrawingLine = false;
+		bool downSpaceKey = false;
+		Point posStart;
+
 		// 変数：選択範囲の描画
 		bool lineMode = false;
 		bool selecting = false;
@@ -98,12 +104,18 @@ namespace WindowsFormsApp1
 		private void BtnCapture_Click(object sender, EventArgs e)
 		{
 			ViewCaptureFrame();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：画像の表示
 		private void BtnView_Click(object sender, EventArgs e)
 		{
 			GetPicture();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：選択範囲をトリミング
@@ -111,6 +123,9 @@ namespace WindowsFormsApp1
 		{
 			EditMethod = TrimPicture;
 			CheckPicture(EditMethod, 1, 1, true);
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 		
 		// ボタン：枠線描画
@@ -118,6 +133,9 @@ namespace WindowsFormsApp1
 		{
 			EditMethod = DrawFrame;
 			CheckPicture(EditMethod, 1, 1, false);
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：矩形ライン描画
@@ -125,30 +143,45 @@ namespace WindowsFormsApp1
 		{
 			EditMethod = DrawQuad;
 			CheckPicture(EditMethod, 1, 1, true);
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 		
 		// ボタン：ライン描画
 		private void BtnLine_Click(object sender, EventArgs e)
 		{
 			ChangeLineMode();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 		
 		// ボタン：アンドゥ/リドゥ
 		private void BtnUndo_Click(object sender, EventArgs e)
 		{
 			Undo();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：画像をクリップボードにコピー
 		private void BtnCopy_Click(object sender, EventArgs e)
 		{
 			CopyToClipboard();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：画像を保存
 		private void BtnSave_Click(object sender, EventArgs e)
 		{
 			SavePicture();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：画像を閉じる
@@ -156,12 +189,18 @@ namespace WindowsFormsApp1
 		{
 			EditMethod = ClosePicture;
 			CheckPicture(EditMethod, 1, 1, true);
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		// ボタン：設定
 		private void BtnSetting_Click(object sender, EventArgs e)
 		{
 			OpenSetting();
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
 		}
 
 		//******************************//
@@ -176,55 +215,68 @@ namespace WindowsFormsApp1
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
 			{
-				// 座標を保存
-				staPoint.X = cursorPos().X;
-				staPoint.Y = cursorPos().Y;
-
-				// 描画するImageオブジェクトを作成
-				// サイズだけ指定すると無色透明のキャンバスになる
-				bm = new Bitmap(pbDraw.Width, pbDraw.Height);
-
-				// ImageオブジェクトのGraphicsオブジェクトを作成
-				g = Graphics.FromImage(bm);
-
-				// ライン描画モード時
-				if (lineMode)
+				// スペースキーを押している時
+				if (downSpaceKey)
 				{
-					// ドラッグしなかった時のために一旦座標を取得
-					endPoint.X = cursorPos().X;
-					endPoint.Y = cursorPos().Y;
-
-					// Undoのための画像バックアップ(Old)
-					BackupImageOld();
-
-					// Penオブジェクトの作成
-					linePen = new Pen(Settings.lineColor, Settings.lineBorder);
-
-					// 矢印設定を判定
-					if (Settings.useArrow)
-					{
-						int i = Settings.lineBorder;
-
-						// ラインに矢印を設定する
-						linePen.CustomEndCap = new AdjustableArrowCap(3, 3);
-					}
-					else
-					{
-						// ラインの矢印を除去する
-						linePen.EndCap = LineCap.NoAnchor;
-					}
-
-					// スタイルを指定
-					linePen.DashStyle = DashStyle.Solid;
+					isDragging = true;
+					posStart = e.Location;
 				}
-				// 選択範囲モード時
+				// スペースキーを押していない時
 				else
 				{
-					// Penオブジェクトの作成
-					linePen = new Pen(selectColor, selectBorder);
+					// スペースキーを押しても反応が無いようにする
+					isDrawingLine = true;
 
-					// スタイルを指定
-					linePen.DashStyle = DashStyle.Dot;
+					// 座標を保存
+					staPoint.X = cursorPos().X;
+					staPoint.Y = cursorPos().Y;
+
+					// 描画するImageオブジェクトを作成
+					// サイズだけ指定すると無色透明のキャンバスになる
+					bm = new Bitmap(pbDraw.Width, pbDraw.Height);
+
+					// ImageオブジェクトのGraphicsオブジェクトを作成
+					g = Graphics.FromImage(bm);
+
+					// ライン描画モード時
+					if (lineMode)
+					{
+						// ドラッグしなかった時のために一旦座標を取得
+						endPoint.X = cursorPos().X;
+						endPoint.Y = cursorPos().Y;
+
+						// Undoのための画像バックアップ(Old)
+						BackupImageOld();
+
+						// Penオブジェクトの作成
+						linePen = new Pen(Settings.lineColor, Settings.lineBorder);
+
+						// 矢印設定を判定
+						if (Settings.useArrow)
+						{
+							int i = Settings.lineBorder;
+
+							// ラインに矢印を設定する
+							linePen.CustomEndCap = new AdjustableArrowCap(3, 3);
+						}
+						else
+						{
+							// ラインの矢印を除去する
+							linePen.EndCap = LineCap.NoAnchor;
+						}
+
+						// スタイルを指定
+						linePen.DashStyle = DashStyle.Solid;
+					}
+					// 選択範囲モード時
+					else
+					{
+						// Penオブジェクトの作成
+						linePen = new Pen(selectColor, selectBorder);
+
+						// スタイルを指定
+						linePen.DashStyle = DashStyle.Dot;
+					}
 				}
 			}
 		}
@@ -235,35 +287,107 @@ namespace WindowsFormsApp1
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
 			{
-				// ライン描画モード時
-				if (lineMode)
+				// スペースキーを押している時
+				if (isDragging && downSpaceKey)
 				{
-					// マウスの左ボタンが押されている場合のみ処理
-					if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
+					Point pos = new Point(
+					e.Location.X - posStart.X,
+					e.Location.Y - posStart.Y);
+
+					pnlBottom.AutoScrollPosition = new Point(
+						-pnlBottom.AutoScrollPosition.X - pos.X,
+						-pnlBottom.AutoScrollPosition.Y - pos.Y);
+				}
+				// スペースキーを押していない時
+				else
+				{
+					// ライン描画モード時
+					if (lineMode)
 					{
-						// Shiftキーが押されていれば直線にする
-						if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+						// マウスの左ボタンが押されている場合のみ処理
+						if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
 						{
-							// 比較のためにXとYの移動距離を算出
-							int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
-							int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
-
-							// 角度を算出
-							double d = 0.0;
-
-							if (checkPosX != 0 && checkPosY != 0) // 0除算対策
+							// Shiftキーが押されていれば直線にする
+							if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 							{
-								// 角度を求める
-								d = Math.Atan2(checkPosY, checkPosX);
+								// 比較のためにXとYの移動距離を算出
+								int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
+								int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
 
-								// ラジアンから度数に変換
-								d = d * 180 / Math.PI;
+								// 角度を算出
+								double d = 0.0;
+
+								if (checkPosX != 0 && checkPosY != 0) // 0除算対策
+								{
+									// 角度を求める
+									d = Math.Atan2(checkPosY, checkPosX);
+
+									// ラジアンから度数に変換
+									d = d * 180 / Math.PI;
+								}
+
+								// XとYのどちらが長いか比較する
+								if (checkPosX >= checkPosY) // 横長の場合
+								{
+									if (40.0 < d && d < 50.0)
+									{
+										// 座標を取得
+										// 開始位置に対して現在位置が正負どちらか判定して処理
+										endPoint.X = cursorPos().X;
+										endPoint.Y = staPoint.Y +
+											(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
+									}
+									else
+									{
+										// 座標を取得
+										endPoint.X = cursorPos().X;
+										endPoint.Y = staPoint.Y;
+									}
+								}
+								else // 縦長の場合
+								{
+									if (40.0 < d && d < 50.0)
+									{
+										// 座標を取得
+										// 開始位置に対して現在位置が正負どちらか判定して処理
+										endPoint.X = staPoint.X +
+											(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
+										endPoint.Y = cursorPos().Y;
+									}
+									else
+									{
+										// 座標を取得
+										endPoint.X = staPoint.X;
+										endPoint.Y = cursorPos().Y;
+									}
+								}
+							}
+							else
+							{
+								// 座標を取得
+								endPoint.X = cursorPos().X;
+								endPoint.Y = cursorPos().Y;
 							}
 
-							// XとYのどちらが長いか比較する
-							if (checkPosX >= checkPosY) // 横長の場合
+							// 描画
+							DrawLine();
+						}
+					}
+					// 選択範囲モード時
+					else
+					{
+						// マウスの左ボタンが押されている場合のみ処理
+						if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
+						{
+							// Shiftキーが押されていれば直線にする
+							if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 							{
-								if (40.0 < d && d < 50.0)
+								// 比較のためにXとYの移動距離を算出
+								int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
+								int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
+
+								// XとYのどちらが長いか比較する
+								if (checkPosX >= checkPosY) // 横長の場合
 								{
 									// 座標を取得
 									// 開始位置に対して現在位置が正負どちらか判定して処理
@@ -271,16 +395,7 @@ namespace WindowsFormsApp1
 									endPoint.Y = staPoint.Y +
 										(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
 								}
-								else
-								{
-									// 座標を取得
-									endPoint.X = cursorPos().X;
-									endPoint.Y = staPoint.Y;
-								}
-							}
-							else // 縦長の場合
-							{
-								if (40.0 < d && d < 50.0)
+								else // 縦長の場合
 								{
 									// 座標を取得
 									// 開始位置に対して現在位置が正負どちらか判定して処理
@@ -288,65 +403,17 @@ namespace WindowsFormsApp1
 										(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
 									endPoint.Y = cursorPos().Y;
 								}
-								else
-								{
-									// 座標を取得
-									endPoint.X = staPoint.X;
-									endPoint.Y = cursorPos().Y;
-								}
 							}
-						}
-						else
-						{
-							// 座標を取得
-							endPoint.X = cursorPos().X;
-							endPoint.Y = cursorPos().Y;
-						}
-
-						// 描画
-						DrawLine();
-					}
-				}
-				// 選択範囲モード時
-				else
-				{
-					// マウスの左ボタンが押されている場合のみ処理
-					if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
-					{
-						// Shiftキーが押されていれば直線にする
-						if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-						{
-							// 比較のためにXとYの移動距離を算出
-							int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
-							int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
-
-							// XとYのどちらが長いか比較する
-							if (checkPosX >= checkPosY) // 横長の場合
+							else
 							{
 								// 座標を取得
-								// 開始位置に対して現在位置が正負どちらか判定して処理
 								endPoint.X = cursorPos().X;
-								endPoint.Y = staPoint.Y +
-									(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
-							}
-							else // 縦長の場合
-							{
-								// 座標を取得
-								// 開始位置に対して現在位置が正負どちらか判定して処理
-								endPoint.X = staPoint.X +
-									(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
 								endPoint.Y = cursorPos().Y;
 							}
-						}
-						else
-						{
-							// 座標を取得
-							endPoint.X = cursorPos().X;
-							endPoint.Y = cursorPos().Y;
-						}
 
-						// 選択範囲の描画
-						DrawSelect();
+							// 選択範囲の描画
+							DrawSelect();
+						}
 					}
 				}
 			}
@@ -358,97 +425,88 @@ namespace WindowsFormsApp1
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
 			{
-				// ライン描画モード時
-				if (lineMode)
+				// スペースキーを押している時
+				if (downSpaceKey)
 				{
-					// 先にバックアップ画像で塗り潰す
-					g.DrawImage(imgNow, 0, 0);
-
-					// 今だけアンチエイリアスに設定
-					g.SmoothingMode = SmoothingMode.AntiAlias;
-
-					// ラインを描画
-					g.DrawLine(linePen, staPoint, endPoint);
-
-					// アンチエイリアス無しに戻す
-					g.SmoothingMode = SmoothingMode.None;
-
-					// ライン描画PictureBoxに表示
-					pbDraw.Image = bm;
-
-					// Undoのための画像バックアップ(Now)
-					BackupImageNow();
-
-					// 選択範囲の描画をクリア
-					pbLine.Image = null;
+					isDragging = false;
 				}
-				// 選択範囲モード時
+				// スペースキーを押していない時
 				else
 				{
-					// 位置を判定して補正
-					if (staPoint.X <= endPoint.X) // 左から右へ
-					{
-						if (staPoint.Y <= endPoint.Y) // 左上から右下へ
-						{
-							p0 = new Point(staPoint.X, staPoint.Y); // 上辺
-							p1 = new Point(endPoint.X, staPoint.Y); // 底辺
-							p2 = new Point(staPoint.X, endPoint.Y); // 左辺
-							p3 = new Point(endPoint.X, endPoint.Y); // 右辺
-						}
-						else // 左下から右上へ
-						{
-							p0 = new Point(staPoint.X, endPoint.Y); // 上辺
-							p1 = new Point(endPoint.X, endPoint.Y); // 底辺
-							p2 = new Point(staPoint.X, staPoint.Y); // 左辺
-							p3 = new Point(endPoint.X, staPoint.Y); // 右辺
-						}
-					}
-					else // 右から左へ
-					{
-						if (staPoint.Y <= endPoint.Y) // 右上から左下へ
-						{
-							p0 = new Point(endPoint.X, staPoint.Y); // 上辺
-							p1 = new Point(staPoint.X, staPoint.Y); // 底辺
-							p2 = new Point(endPoint.X, endPoint.Y); // 左辺
-							p3 = new Point(staPoint.X, endPoint.Y); // 右辺
-						}
-						else // 右下から左上へ
-						{
-							p0 = new Point(endPoint.X, endPoint.Y); // 上辺
-							p1 = new Point(staPoint.X, endPoint.Y); // 底辺
-							p2 = new Point(endPoint.X, staPoint.Y); // 左辺
-							p3 = new Point(staPoint.X, staPoint.Y); // 右辺
-						}
-					}
+					// スペースキーを押せるようライン描画終了を明示
+					isDrawingLine = false;
 
-					// 開始点と終了点にソートを反映
-					staPoint = p0;
-					endPoint = p3;
+					// ライン描画モード時
+					if (lineMode)
+					{
+						// 先にバックアップ画像で塗り潰す
+						g.DrawImage(imgNow, 0, 0);
 
-					// 選択範囲フラグON
-					selecting = true;
+						// 今だけアンチエイリアスに設定
+						g.SmoothingMode = SmoothingMode.AntiAlias;
+
+						// ラインを描画
+						g.DrawLine(linePen, staPoint, endPoint);
+
+						// アンチエイリアス無しに戻す
+						g.SmoothingMode = SmoothingMode.None;
+
+						// ライン描画PictureBoxに表示
+						pbDraw.Image = bm;
+
+						// Undoのための画像バックアップ(Now)
+						BackupImageNow();
+
+						// 選択範囲の描画をクリア
+						pbLine.Image = null;
+					}
+					// 選択範囲モード時
+					else
+					{
+						// 位置を判定して補正
+						if (staPoint.X <= endPoint.X) // 左から右へ
+						{
+							if (staPoint.Y <= endPoint.Y) // 左上から右下へ
+							{
+								p0 = new Point(staPoint.X, staPoint.Y); // 上辺
+								p1 = new Point(endPoint.X, staPoint.Y); // 底辺
+								p2 = new Point(staPoint.X, endPoint.Y); // 左辺
+								p3 = new Point(endPoint.X, endPoint.Y); // 右辺
+							}
+							else // 左下から右上へ
+							{
+								p0 = new Point(staPoint.X, endPoint.Y); // 上辺
+								p1 = new Point(endPoint.X, endPoint.Y); // 底辺
+								p2 = new Point(staPoint.X, staPoint.Y); // 左辺
+								p3 = new Point(endPoint.X, staPoint.Y); // 右辺
+							}
+						}
+						else // 右から左へ
+						{
+							if (staPoint.Y <= endPoint.Y) // 右上から左下へ
+							{
+								p0 = new Point(endPoint.X, staPoint.Y); // 上辺
+								p1 = new Point(staPoint.X, staPoint.Y); // 底辺
+								p2 = new Point(endPoint.X, endPoint.Y); // 左辺
+								p3 = new Point(staPoint.X, endPoint.Y); // 右辺
+							}
+							else // 右下から左上へ
+							{
+								p0 = new Point(endPoint.X, endPoint.Y); // 上辺
+								p1 = new Point(staPoint.X, endPoint.Y); // 底辺
+								p2 = new Point(endPoint.X, staPoint.Y); // 左辺
+								p3 = new Point(staPoint.X, staPoint.Y); // 右辺
+							}
+						}
+
+						// 開始点と終了点にソートを反映
+						staPoint = p0;
+						endPoint = p3;
+
+						// 選択範囲フラグON
+						selecting = true;
+					}
 				}
-			}
-		}
-
-
-		// マウス：PictureBox内に入った時
-		private void PbLine_MouseEnter(object sender, EventArgs e)
-		{
-			// カーソルを変える
-			if (lineMode)
-			{
-				pbDraw.Cursor = Cursors.Cross;
-			}
-		}
-
-		// マウス：PictureBox内から出た時
-		private void PbLine_MouseLeave(object sender, EventArgs e)
-		{
-			// カーソルを元に戻す
-			if (lineMode)
-			{
-				pbDraw.Cursor = Cursors.Default;
 			}
 		}
 
@@ -643,6 +701,28 @@ namespace WindowsFormsApp1
 			{
 				OpenSetting();
 			}
+
+			// スペースキーを押した時
+			if (e.KeyCode == Keys.Space)
+			{
+				// 画像が存在してライン描画中じゃない場合は手のひらカーソルにする
+				if (pbDraw != null && isDrawingLine == false)
+				{
+					pbDraw.Cursor = Cursors.Hand;
+					downSpaceKey = true;
+				}
+			}
+		}
+
+		// スペースキーを離した時専用
+		private void Form1_KeyUp(object sender, KeyEventArgs e)
+		{
+			// 画像が存在してライン描画中じゃない場合は手のひらカーソルを解除する
+			if (pbDraw != null && isDrawingLine == false)
+			{
+				pbDraw.Cursor = Cursors.Default;
+				downSpaceKey = false;
+			}
 		}
 
 
@@ -734,7 +814,7 @@ namespace WindowsFormsApp1
 				}
 				else
 				{
-					MessageBox.Show("範囲選択するかクリップボードに画像を保存してください");
+					MessageBox.Show("キャプチャ枠を表示して取り込み先を決めてください");
 				}
 			}
 		}
@@ -908,6 +988,7 @@ namespace WindowsFormsApp1
 			pbLine.Image = bm;
 		}
 
+		// 関数：ライン描画モード変更
 		private void ChangeLineMode()
 		{
 			// PictureBoxにある画像の取得
@@ -916,23 +997,11 @@ namespace WindowsFormsApp1
 				// ライン描画モードの切り替えのみ行う
 				if (lineMode) // ON → OFF
 				{
-					lineMode = false;
-
-					// アイコン差し替え
-					btnLine.BackgroundImage = Properties.Resources.icon_Line;
+					LineModeOff();
 				}
 				else // OFF → ON
 				{
-					lineMode = true;
-
-					// アイコン差し替え
-					btnLine.BackgroundImage = Properties.Resources.icon_Line_On;
-
-					// 選択範囲フラグOFF
-					selecting = false;
-
-					// 選択範囲の描画をクリア
-					pbLine.Image = null;
+					lineModeOn();
 				}
 			}
 			else // 無い場合
@@ -940,6 +1009,34 @@ namespace WindowsFormsApp1
 				MessageBox.Show("画像がありません。" + "\r\n" +
 								"先に画像を取り込んでください。");
 			}
+		}
+		// ライン描画モードON
+		private void lineModeOn()
+		{
+			lineMode = true;
+
+			// アイコン「ON」
+			btnLine.BackgroundImage = Properties.Resources.icon_Line_On;
+
+			// 選択範囲フラグOFF
+			selecting = false;
+
+			// 選択範囲の描画をクリア
+			pbLine.Image = null;
+
+			// カーソルを十字型に変える
+			pbDraw.Cursor = Cursors.Cross;
+		}
+		// ライン描画モードOFF
+		private void LineModeOff()
+		{
+			lineMode = false;
+
+			// アイコン「OFF」
+			btnLine.BackgroundImage = Properties.Resources.icon_Line;
+
+			// カーソルを元に戻す
+			pbDraw.Cursor = Cursors.Default;
 		}
 
 		private void Undo()

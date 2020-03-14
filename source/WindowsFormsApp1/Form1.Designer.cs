@@ -323,8 +323,6 @@
 			this.pbLine.TabIndex = 1;
 			this.pbLine.TabStop = false;
 			this.pbLine.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseDown);
-			this.pbLine.MouseEnter += new System.EventHandler(this.PbLine_MouseEnter);
-			this.pbLine.MouseLeave += new System.EventHandler(this.PbLine_MouseLeave);
 			this.pbLine.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseMove);
 			this.pbLine.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLine_MouseUp);
 			// 
@@ -395,10 +393,11 @@
 			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(435, 100);
 			this.Name = "Form1";
-			this.Text = "Tenpu Gazo Maker v.1.03";
+			this.Text = "Tenpu Gazo Maker v.1.04";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
 			this.pnlTop.ResumeLayout(false);
 			this.pnlBottom.ResumeLayout(false);
 			this.pnlBottom.PerformLayout();
