@@ -14,7 +14,9 @@ namespace WindowsFormsApp1
 {
 	public partial class Form1 : Form
 	{
+		// 変数：フォーム
 		FrameForm frame;
+		FormRightClick miniSettingsForm;
 
 		// 変数：キャプチャ用の枠線
 		int capLineBorder = 4;
@@ -81,6 +83,11 @@ namespace WindowsFormsApp1
 
 			// ライン描画PictureBoxの親を背景PictureBoxに設定
 			pbLine.Parent = pbDraw;
+
+			// ミニ設定フォームのオブジェクトを生成
+			miniSettingsForm = new FormRightClick();
+			// ミニ設定フォームをタスクバーに表示しない
+			miniSettingsForm.ShowInTaskbar = false;
 		}
 
 		// 終了時に実行
@@ -212,70 +219,90 @@ namespace WindowsFormsApp1
 		// マウス：ドラッグ開始
 		private void PbLine_MouseDown(object sender, MouseEventArgs e)
 		{
-			// PictureBoxに画像がある場合
-			if (pbDraw.Image != null)
+			// マウス右クリックが押された場合
+			if (MouseButtons.Right == e.Button)
 			{
-				// スペースキーを押している時
-				if (downSpaceKey)
+				// カーソルの近くに表示
+				miniSettingsForm.StartPosition = FormStartPosition.Manual;
+				miniSettingsForm.Location = new Point(
+					Cursor.Position.X - 55, Cursor.Position.Y - 23);
+
+				// 最前面に表示
+				miniSettingsForm.TopMost = true;
+
+				// ミニ設定フォームを表示
+				miniSettingsForm.Show();
+
+				// アクティブにする
+				miniSettingsForm.Activate();
+			}
+			else
+			{
+				// PictureBoxに画像がある場合
+				if (pbDraw.Image != null)
 				{
-					isDragging = true;
-					posStart = e.Location;
-				}
-				// スペースキーを押していない時
-				else
-				{
-					// スペースキーを押しても反応が無いようにする
-					isDrawingLine = true;
-
-					// 座標を保存
-					staPoint.X = cursorPos().X;
-					staPoint.Y = cursorPos().Y;
-
-					// 描画するImageオブジェクトを作成
-					// サイズだけ指定すると無色透明のキャンバスになる
-					bm = new Bitmap(pbDraw.Width, pbDraw.Height);
-
-					// ImageオブジェクトのGraphicsオブジェクトを作成
-					g = Graphics.FromImage(bm);
-
-					// ライン描画モード時
-					if (lineMode)
+					// スペースキーを押している時
+					if (downSpaceKey)
 					{
-						// ドラッグしなかった時のために一旦座標を取得
-						endPoint.X = cursorPos().X;
-						endPoint.Y = cursorPos().Y;
-
-						// Undoのための画像バックアップ(Old)
-						BackupImageOld();
-
-						// Penオブジェクトの作成
-						linePen = new Pen(Settings.lineColor, Settings.lineBorder);
-
-						// 矢印設定を判定
-						if (Settings.useArrow)
-						{
-							int i = Settings.lineBorder;
-
-							// ラインに矢印を設定する
-							linePen.CustomEndCap = new AdjustableArrowCap(3, 3);
-						}
-						else
-						{
-							// ラインの矢印を除去する
-							linePen.EndCap = LineCap.NoAnchor;
-						}
-
-						// スタイルを指定
-						linePen.DashStyle = DashStyle.Solid;
+						isDragging = true;
+						posStart = e.Location;
 					}
-					// 選択範囲モード時
+					// スペースキーを押していない時
 					else
 					{
-						// Penオブジェクトの作成
-						linePen = new Pen(selectColor, selectBorder);
+						// スペースキーを押しても反応が無いようにする
+						isDrawingLine = true;
 
-						// スタイルを指定
-						linePen.DashStyle = DashStyle.Dot;
+						// 座標を保存
+						staPoint.X = cursorPos().X;
+						staPoint.Y = cursorPos().Y;
+
+						// 描画するImageオブジェクトを作成
+						// サイズだけ指定すると無色透明のキャンバスになる
+						bm = new Bitmap(pbDraw.Width, pbDraw.Height);
+
+						// ImageオブジェクトのGraphicsオブジェクトを作成
+						g = Graphics.FromImage(bm);
+
+						// ライン描画モード時
+						if (lineMode)
+						{
+							// ドラッグしなかった時のために一旦座標を取得
+							endPoint.X = cursorPos().X;
+							endPoint.Y = cursorPos().Y;
+
+							// Undoのための画像バックアップ(Old)
+							BackupImageOld();
+
+							// Penオブジェクトの作成
+							linePen = new Pen(Settings.lineColor, Settings.lineBorder);
+
+							// 矢印設定を判定
+							if (Settings.useArrow)
+							{
+								int i = Settings.lineBorder;
+
+								// ラインに矢印を設定する
+								linePen.CustomEndCap = new AdjustableArrowCap(3, 3);
+							}
+							else
+							{
+								// ラインの矢印を除去する
+								linePen.EndCap = LineCap.NoAnchor;
+							}
+
+							// スタイルを指定
+							linePen.DashStyle = DashStyle.Solid;
+						}
+						// 選択範囲モード時
+						else
+						{
+							// Penオブジェクトの作成
+							linePen = new Pen(selectColor, selectBorder);
+
+							// スタイルを指定
+							linePen.DashStyle = DashStyle.Dot;
+						}
 					}
 				}
 			}
@@ -927,22 +954,24 @@ namespace WindowsFormsApp1
 				//ImageオブジェクトのGraphicsオブジェクトを作成する
 				Graphics g2 = Graphics.FromImage(canvas);
 
-				// Penオブジェクトの作成
-				linePen = new Pen(Settings.lineColor, Settings.lineBorder);
-
-				// スタイルを指定
-				linePen.DashStyle = DashStyle.Solid;
-
 				// 選択範囲の４頂点を代入
 				initialize4Point();
 
-				// ラインを描画
-				g2.DrawLine(linePen, p0, p1); // 上辺
-				g2.DrawLine(linePen, p2, p3); // 底辺
-				g2.DrawLine(linePen, p0, p2); // 左辺
-				g2.DrawLine(linePen, p1, p3); // 右辺
+				// Penオブジェクトの作成
+				SolidBrush sb = new SolidBrush(Settings.lineColor);
+				int ib = Settings.lineBorder;
+
+				int w = p1.X - p0.X; // 幅
+				int h = p2.Y - p0.Y; // 高さ
+
+				// グレーの枠線を引く
+				g2.FillRectangle(sb, p0.X, p0.Y, w, ib);		// 上辺
+				g2.FillRectangle(sb, p0.X, p2.Y - ib, w, ib);	// 底辺
+				g2.FillRectangle(sb, p0.X, p0.Y, ib, h);		// 左辺
+				g2.FillRectangle(sb, p1.X - ib, p0.Y, ib, h);	//　右辺
 
 				// リソースを解放
+				sb.Dispose();
 				g2.Dispose();
 
 				// PictureBox1に表示
@@ -1016,7 +1045,7 @@ namespace WindowsFormsApp1
 			lineMode = true;
 
 			// アイコン「ON」
-			btnLine.BackgroundImage = Properties.Resources.icon_Line_On;
+			btnLine.BackgroundImage = Properties.Resources.icon_LineMode;
 
 			// 選択範囲フラグOFF
 			selecting = false;
@@ -1085,6 +1114,9 @@ namespace WindowsFormsApp1
 
 		private void OpenSetting()
 		{
+			// ミニ設定フォームを隠す
+			miniSettingsForm.Hide();
+
 			// 設定フォームを作成
 			var form = new FormSettings();
 
@@ -1263,6 +1295,118 @@ namespace WindowsFormsApp1
 		{
 			pnlColor1.BackColor = Settings.frameColor;
 			pnlColor2.BackColor = Settings.lineColor;
+		}
+
+
+		//******************************//
+		//								//
+		//		　 アイコン変更	　		//
+		//								//
+		//******************************//
+
+		private void BtnCapture_MouseEnter(object sender, EventArgs e)
+		{
+			btnCapture.BackgroundImage = Properties.Resources.icon_Capture_On;
+		}
+		private void BtnCapture_MouseLeave(object sender, EventArgs e)
+		{
+			btnCapture.BackgroundImage = Properties.Resources.icon_Capture;
+		}
+
+		private void BtnView_MouseEnter(object sender, EventArgs e)
+		{
+			btnView.BackgroundImage = Properties.Resources.icon_View_On;
+		}
+		private void BtnView_MouseLeave(object sender, EventArgs e)
+		{
+			btnView.BackgroundImage = Properties.Resources.icon_View;
+		}
+
+		private void BtnTrim_MouseEnter(object sender, EventArgs e)
+		{
+			btnTrim.BackgroundImage = Properties.Resources.icon_Trim_On;
+		}
+		private void BtnTrim_MouseLeave(object sender, EventArgs e)
+		{
+			btnTrim.BackgroundImage = Properties.Resources.icon_Trim;
+		}
+
+		private void BtnFrame_MouseEnter(object sender, EventArgs e)
+		{
+			btnFrame.BackgroundImage = Properties.Resources.icon_Frame_On;
+		}
+		private void BtnFrame_MouseLeave(object sender, EventArgs e)
+		{
+			btnFrame.BackgroundImage = Properties.Resources.icon_Frame;
+		}
+
+		private void BtnQuad_MouseEnter(object sender, EventArgs e)
+		{
+			btnQuad.BackgroundImage = Properties.Resources.icon_Quad_On;
+		}
+		private void BtnQuad_MouseLeave(object sender, EventArgs e)
+		{
+			btnQuad.BackgroundImage = Properties.Resources.icon_Quad;
+		}
+
+		private void BtnLine_MouseEnter(object sender, EventArgs e)
+		{
+			if (lineMode == false)
+			{
+				btnLine.BackgroundImage = Properties.Resources.icon_Line_On;
+			}
+		}
+		private void BtnLine_MouseLeave(object sender, EventArgs e)
+		{
+			if (lineMode == false)
+			{
+				btnLine.BackgroundImage = Properties.Resources.icon_Line;
+			}
+		}
+
+		private void BtnUndo_MouseEnter(object sender, EventArgs e)
+		{
+			btnUndo.BackgroundImage = Properties.Resources.icon_Undo_On;
+		}
+		private void BtnUndo_MouseLeave(object sender, EventArgs e)
+		{
+			btnUndo.BackgroundImage = Properties.Resources.icon_Undo;
+		}
+
+		private void BtnCopy_MouseEnter(object sender, EventArgs e)
+		{
+			btnCopy.BackgroundImage = Properties.Resources.icon_Copy_On;
+		}
+		private void BtnCopy_MouseLeave(object sender, EventArgs e)
+		{
+			btnCopy.BackgroundImage = Properties.Resources.icon_Copy;
+		}
+
+		private void BtnSave_MouseEnter(object sender, EventArgs e)
+		{
+			btnSave.BackgroundImage = Properties.Resources.icon_Save_On;
+		}
+		private void BtnSave_MouseLeave(object sender, EventArgs e)
+		{
+			btnSave.BackgroundImage = Properties.Resources.icon_Save;
+		}
+
+		private void BtnClose_MouseEnter(object sender, EventArgs e)
+		{
+			btnClose.BackgroundImage = Properties.Resources.icon_Close_On;
+		}
+		private void BtnClose_MouseLeave(object sender, EventArgs e)
+		{
+			btnClose.BackgroundImage = Properties.Resources.icon_Close;
+		}
+
+		private void BtnSetting_MouseEnter(object sender, EventArgs e)
+		{
+			btnSetting.BackgroundImage = Properties.Resources.icon_Set_On;
+		}
+		private void BtnSetting_MouseLeave(object sender, EventArgs e)
+		{
+			btnSetting.BackgroundImage = Properties.Resources.icon_Set;
 		}
 	}
 

@@ -84,8 +84,8 @@
 			this.btnCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnCapture.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnCapture.FlatAppearance.BorderSize = 0;
-			this.btnCapture.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnCapture.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnCapture.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnCapture.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCapture.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnCapture.Location = new System.Drawing.Point(14, 9);
@@ -96,6 +96,8 @@
 			this.toolTip1.SetToolTip(this.btnCapture, "キャプチャするための枠を表示/非表示します。\r\n枠は大きさを自由に変えられます。\r\n[ ショートカットキー：Ctrl + A ]");
 			this.btnCapture.UseVisualStyleBackColor = false;
 			this.btnCapture.Click += new System.EventHandler(this.BtnCapture_Click);
+			this.btnCapture.MouseEnter += new System.EventHandler(this.BtnCapture_MouseEnter);
+			this.btnCapture.MouseLeave += new System.EventHandler(this.BtnCapture_MouseLeave);
 			// 
 			// btnTrim
 			// 
@@ -104,8 +106,8 @@
 			this.btnTrim.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnTrim.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnTrim.FlatAppearance.BorderSize = 0;
-			this.btnTrim.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnTrim.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnTrim.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnTrim.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnTrim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnTrim.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnTrim.Location = new System.Drawing.Point(86, 9);
@@ -116,6 +118,8 @@
 			this.toolTip1.SetToolTip(this.btnTrim, "画像上の選択範囲をトリミングします。\r\n[ ショートカットキー：Ctrl + T ]");
 			this.btnTrim.UseVisualStyleBackColor = false;
 			this.btnTrim.Click += new System.EventHandler(this.BtnTrim_Click);
+			this.btnTrim.MouseEnter += new System.EventHandler(this.BtnTrim_MouseEnter);
+			this.btnTrim.MouseLeave += new System.EventHandler(this.BtnTrim_MouseLeave);
 			// 
 			// btnView
 			// 
@@ -124,8 +128,8 @@
 			this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnView.FlatAppearance.BorderSize = 0;
-			this.btnView.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnView.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnView.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnView.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnView.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnView.Location = new System.Drawing.Point(50, 9);
@@ -137,6 +141,8 @@
         "\r\nまた、「Ctrl + V」でクリップボードの画像をツールに貼り付けます。");
 			this.btnView.UseVisualStyleBackColor = false;
 			this.btnView.Click += new System.EventHandler(this.BtnView_Click);
+			this.btnView.MouseEnter += new System.EventHandler(this.BtnView_MouseEnter);
+			this.btnView.MouseLeave += new System.EventHandler(this.BtnView_MouseLeave);
 			// 
 			// btnSave
 			// 
@@ -145,8 +151,8 @@
 			this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnSave.FlatAppearance.BorderSize = 0;
-			this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSave.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnSave.Location = new System.Drawing.Point(302, 9);
@@ -157,6 +163,8 @@
 			this.toolTip1.SetToolTip(this.btnSave, "ツール上の画像をPNGで保存します。\r\n保存先は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + S ]");
 			this.btnSave.UseVisualStyleBackColor = false;
 			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+			this.btnSave.MouseEnter += new System.EventHandler(this.BtnSave_MouseEnter);
+			this.btnSave.MouseLeave += new System.EventHandler(this.BtnSave_MouseLeave);
 			// 
 			// btnLine
 			// 
@@ -165,8 +173,8 @@
 			this.btnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnLine.FlatAppearance.BorderSize = 0;
-			this.btnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnLine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnLine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLine.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnLine.Location = new System.Drawing.Point(194, 9);
@@ -177,6 +185,8 @@
 			this.toolTip1.SetToolTip(this.btnLine, "画像上でラインを引くモードになります。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + L ]");
 			this.btnLine.UseVisualStyleBackColor = false;
 			this.btnLine.Click += new System.EventHandler(this.BtnLine_Click);
+			this.btnLine.MouseEnter += new System.EventHandler(this.BtnLine_MouseEnter);
+			this.btnLine.MouseLeave += new System.EventHandler(this.BtnLine_MouseLeave);
 			// 
 			// btnSetting
 			// 
@@ -185,8 +195,8 @@
 			this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnSetting.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnSetting.FlatAppearance.BorderSize = 0;
-			this.btnSetting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnSetting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnSetting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnSetting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSetting.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnSetting.Location = new System.Drawing.Point(374, 9);
@@ -197,6 +207,8 @@
 			this.toolTip1.SetToolTip(this.btnSetting, "設定画面を開きます。\r\n[ ショートカットキー：Esc ]");
 			this.btnSetting.UseVisualStyleBackColor = false;
 			this.btnSetting.Click += new System.EventHandler(this.BtnSetting_Click);
+			this.btnSetting.MouseEnter += new System.EventHandler(this.BtnSetting_MouseEnter);
+			this.btnSetting.MouseLeave += new System.EventHandler(this.BtnSetting_MouseLeave);
 			// 
 			// btnClose
 			// 
@@ -205,8 +217,8 @@
 			this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnClose.FlatAppearance.BorderSize = 0;
-			this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnClose.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnClose.Location = new System.Drawing.Point(338, 9);
@@ -217,6 +229,8 @@
 			this.toolTip1.SetToolTip(this.btnClose, "ツール上の画像をクリアします。\r\n[ ショートカットキー：Ctrl + W ]");
 			this.btnClose.UseVisualStyleBackColor = false;
 			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+			this.btnClose.MouseEnter += new System.EventHandler(this.BtnClose_MouseEnter);
+			this.btnClose.MouseLeave += new System.EventHandler(this.BtnClose_MouseLeave);
 			// 
 			// btnQuad
 			// 
@@ -225,8 +239,8 @@
 			this.btnQuad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnQuad.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnQuad.FlatAppearance.BorderSize = 0;
-			this.btnQuad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnQuad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnQuad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnQuad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnQuad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnQuad.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnQuad.Location = new System.Drawing.Point(158, 9);
@@ -237,6 +251,8 @@
 			this.toolTip1.SetToolTip(this.btnQuad, "画像上の選択範囲に枠線を描画します。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + Q ]");
 			this.btnQuad.UseVisualStyleBackColor = false;
 			this.btnQuad.Click += new System.EventHandler(this.BtnQuad_Click);
+			this.btnQuad.MouseEnter += new System.EventHandler(this.BtnQuad_MouseEnter);
+			this.btnQuad.MouseLeave += new System.EventHandler(this.BtnQuad_MouseLeave);
 			// 
 			// btnCopy
 			// 
@@ -245,8 +261,8 @@
 			this.btnCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnCopy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnCopy.FlatAppearance.BorderSize = 0;
-			this.btnCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCopy.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnCopy.Location = new System.Drawing.Point(266, 9);
@@ -257,6 +273,8 @@
 			this.toolTip1.SetToolTip(this.btnCopy, "ツール上の画像をクリップボードにコピーします。\r\n[ ショートカットキー：Ctrl + C ]");
 			this.btnCopy.UseVisualStyleBackColor = false;
 			this.btnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
+			this.btnCopy.MouseEnter += new System.EventHandler(this.BtnCopy_MouseEnter);
+			this.btnCopy.MouseLeave += new System.EventHandler(this.BtnCopy_MouseLeave);
 			// 
 			// btnFrame
 			// 
@@ -265,8 +283,8 @@
 			this.btnFrame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnFrame.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnFrame.FlatAppearance.BorderSize = 0;
-			this.btnFrame.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnFrame.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnFrame.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnFrame.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnFrame.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnFrame.Location = new System.Drawing.Point(122, 9);
@@ -277,6 +295,8 @@
 			this.toolTip1.SetToolTip(this.btnFrame, "取り込んだ画像の周囲に枠線を追加します。\r\n色と幅は設定画面で指定できます。\r\n[ ショートカットキー：Ctrl + F ]");
 			this.btnFrame.UseVisualStyleBackColor = false;
 			this.btnFrame.Click += new System.EventHandler(this.BtnFrame_Click);
+			this.btnFrame.MouseEnter += new System.EventHandler(this.BtnFrame_MouseEnter);
+			this.btnFrame.MouseLeave += new System.EventHandler(this.BtnFrame_MouseLeave);
 			// 
 			// btnUndo
 			// 
@@ -285,8 +305,8 @@
 			this.btnUndo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnUndo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
 			this.btnUndo.FlatAppearance.BorderSize = 0;
-			this.btnUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
-			this.btnUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(72)))));
+			this.btnUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnUndo.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.btnUndo.Location = new System.Drawing.Point(230, 9);
@@ -297,6 +317,8 @@
 			this.toolTip1.SetToolTip(this.btnUndo, "ツール上の画像の編集に対してUndo/Redoします。\r\n[ ショートカットキー：Ctrl + Z ]");
 			this.btnUndo.UseVisualStyleBackColor = false;
 			this.btnUndo.Click += new System.EventHandler(this.BtnUndo_Click);
+			this.btnUndo.MouseEnter += new System.EventHandler(this.BtnUndo_MouseEnter);
+			this.btnUndo.MouseLeave += new System.EventHandler(this.BtnUndo_MouseLeave);
 			// 
 			// pnlBottom
 			// 
@@ -393,7 +415,7 @@
 			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(435, 100);
 			this.Name = "Form1";
-			this.Text = "Tenpu Gazo Maker v.1.04";
+			this.Text = "Tenpu Gazo Maker v.1.05";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);

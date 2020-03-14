@@ -33,16 +33,12 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.tbFrameBorder = new System.Windows.Forms.TextBox();
-			this.tbLineBorder = new System.Windows.Forms.TextBox();
 			this.tbFrameColerR = new System.Windows.Forms.TextBox();
 			this.tbFrameColerG = new System.Windows.Forms.TextBox();
 			this.tbFrameColerB = new System.Windows.Forms.TextBox();
 			this.tbLineColerR = new System.Windows.Forms.TextBox();
 			this.tbLineColerG = new System.Windows.Forms.TextBox();
 			this.tbLineColerB = new System.Windows.Forms.TextBox();
-			this.tbCaptureSizeY = new System.Windows.Forms.TextBox();
-			this.tbCaptureSizeX = new System.Windows.Forms.TextBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.btnOpenFolderDiag = new System.Windows.Forms.Button();
 			this.tbOutputPath = new System.Windows.Forms.TextBox();
@@ -56,11 +52,19 @@
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pnlTop = new System.Windows.Forms.Panel();
 			this.label4 = new System.Windows.Forms.Label();
+			this.tbCaptureSizeX = new System.Windows.Forms.NumericUpDown();
+			this.tbCaptureSizeY = new System.Windows.Forms.NumericUpDown();
+			this.tbFrameBorder = new System.Windows.Forms.NumericUpDown();
+			this.tbLineBorder = new System.Windows.Forms.NumericUpDown();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			this.pnlTop.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnlLeft
@@ -78,15 +82,15 @@
 			this.label7.Font = new System.Drawing.Font("メイリオ", 9.75F);
 			this.label7.Location = new System.Drawing.Point(54, 104);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(82, 20);
+			this.label7.Size = new System.Drawing.Size(52, 20);
 			this.label7.TabIndex = 0;
-			this.label7.Text = "Line Border";
+			this.label7.Text = "Border";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.label2.Location = new System.Drawing.Point(193, 70);
+			this.label2.Location = new System.Drawing.Point(167, 71);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(42, 20);
 			this.label2.TabIndex = 0;
@@ -96,7 +100,7 @@
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.label8.Location = new System.Drawing.Point(193, 104);
+			this.label8.Location = new System.Drawing.Point(167, 104);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(42, 20);
 			this.label8.TabIndex = 0;
@@ -106,43 +110,17 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.label1.Location = new System.Drawing.Point(54, 70);
+			this.label1.Location = new System.Drawing.Point(54, 71);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(96, 20);
+			this.label1.Size = new System.Drawing.Size(52, 20);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "Frame Border";
-			// 
-			// tbFrameBorder
-			// 
-			this.tbFrameBorder.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbFrameBorder.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbFrameBorder.Location = new System.Drawing.Point(153, 66);
-			this.tbFrameBorder.MaxLength = 1;
-			this.tbFrameBorder.Name = "tbFrameBorder";
-			this.tbFrameBorder.Size = new System.Drawing.Size(34, 27);
-			this.tbFrameBorder.TabIndex = 3;
-			this.tbFrameBorder.Text = "1";
-			this.tbFrameBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.tbFrameBorder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbFrameBorder_KeyPress);
-			// 
-			// tbLineBorder
-			// 
-			this.tbLineBorder.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbLineBorder.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbLineBorder.Location = new System.Drawing.Point(153, 100);
-			this.tbLineBorder.MaxLength = 1;
-			this.tbLineBorder.Name = "tbLineBorder";
-			this.tbLineBorder.Size = new System.Drawing.Size(34, 27);
-			this.tbLineBorder.TabIndex = 7;
-			this.tbLineBorder.Text = "4";
-			this.tbLineBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.tbLineBorder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbLineBorder_KeyPress);
+			this.label1.Text = "Border";
 			// 
 			// tbFrameColerR
 			// 
 			this.tbFrameColerR.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbFrameColerR.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbFrameColerR.Location = new System.Drawing.Point(239, 66);
+			this.tbFrameColerR.Location = new System.Drawing.Point(213, 66);
 			this.tbFrameColerR.MaxLength = 3;
 			this.tbFrameColerR.Name = "tbFrameColerR";
 			this.tbFrameColerR.Size = new System.Drawing.Size(43, 27);
@@ -155,7 +133,7 @@
 			// 
 			this.tbFrameColerG.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbFrameColerG.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbFrameColerG.Location = new System.Drawing.Point(281, 66);
+			this.tbFrameColerG.Location = new System.Drawing.Point(255, 66);
 			this.tbFrameColerG.MaxLength = 3;
 			this.tbFrameColerG.Name = "tbFrameColerG";
 			this.tbFrameColerG.Size = new System.Drawing.Size(43, 27);
@@ -168,7 +146,7 @@
 			// 
 			this.tbFrameColerB.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbFrameColerB.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbFrameColerB.Location = new System.Drawing.Point(323, 66);
+			this.tbFrameColerB.Location = new System.Drawing.Point(297, 66);
 			this.tbFrameColerB.MaxLength = 3;
 			this.tbFrameColerB.Name = "tbFrameColerB";
 			this.tbFrameColerB.Size = new System.Drawing.Size(43, 27);
@@ -181,7 +159,7 @@
 			// 
 			this.tbLineColerR.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbLineColerR.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbLineColerR.Location = new System.Drawing.Point(239, 100);
+			this.tbLineColerR.Location = new System.Drawing.Point(213, 100);
 			this.tbLineColerR.MaxLength = 3;
 			this.tbLineColerR.Name = "tbLineColerR";
 			this.tbLineColerR.Size = new System.Drawing.Size(43, 27);
@@ -194,7 +172,7 @@
 			// 
 			this.tbLineColerG.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbLineColerG.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbLineColerG.Location = new System.Drawing.Point(281, 100);
+			this.tbLineColerG.Location = new System.Drawing.Point(255, 100);
 			this.tbLineColerG.MaxLength = 3;
 			this.tbLineColerG.Name = "tbLineColerG";
 			this.tbLineColerG.Size = new System.Drawing.Size(43, 27);
@@ -207,46 +185,20 @@
 			// 
 			this.tbLineColerB.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.tbLineColerB.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbLineColerB.Location = new System.Drawing.Point(323, 100);
+			this.tbLineColerB.Location = new System.Drawing.Point(297, 100);
 			this.tbLineColerB.MaxLength = 3;
 			this.tbLineColerB.Name = "tbLineColerB";
 			this.tbLineColerB.Size = new System.Drawing.Size(43, 27);
 			this.tbLineColerB.TabIndex = 10;
 			this.tbLineColerB.Text = "30";
 			this.tbLineColerB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.tbLineColerB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbLineColerB_KeyPress);
-			// 
-			// tbCaptureSizeY
-			// 
-			this.tbCaptureSizeY.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbCaptureSizeY.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbCaptureSizeY.Location = new System.Drawing.Point(185, 31);
-			this.tbCaptureSizeY.MaxLength = 6;
-			this.tbCaptureSizeY.Name = "tbCaptureSizeY";
-			this.tbCaptureSizeY.Size = new System.Drawing.Size(47, 27);
-			this.tbCaptureSizeY.TabIndex = 2;
-			this.tbCaptureSizeY.Text = "300";
-			this.tbCaptureSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.tbCaptureSizeY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCaptureSizeY_KeyPress);
-			// 
-			// tbCaptureSizeX
-			// 
-			this.tbCaptureSizeX.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbCaptureSizeX.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.tbCaptureSizeX.Location = new System.Drawing.Point(132, 31);
-			this.tbCaptureSizeX.MaxLength = 6;
-			this.tbCaptureSizeX.Name = "tbCaptureSizeX";
-			this.tbCaptureSizeX.Size = new System.Drawing.Size(47, 27);
-			this.tbCaptureSizeX.TabIndex = 1;
-			this.tbCaptureSizeX.Text = "400";
-			this.tbCaptureSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.tbCaptureSizeX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCaptureSizeX_KeyPress);
+			this.tbLineColerB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbLineColerB_KeyPress_1);
 			// 
 			// label9
 			// 
 			this.label9.AutoSize = true;
 			this.label9.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.label9.Location = new System.Drawing.Point(54, 35);
+			this.label9.Location = new System.Drawing.Point(54, 36);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(74, 20);
 			this.label9.TabIndex = 0;
@@ -256,10 +208,10 @@
 			// 
 			this.btnOpenFolderDiag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOpenFolderDiag.Font = new System.Drawing.Font("メイリオ", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnOpenFolderDiag.Location = new System.Drawing.Point(342, 158);
+			this.btnOpenFolderDiag.Location = new System.Drawing.Point(316, 158);
 			this.btnOpenFolderDiag.Name = "btnOpenFolderDiag";
 			this.btnOpenFolderDiag.Size = new System.Drawing.Size(27, 27);
-			this.btnOpenFolderDiag.TabIndex = 12;
+			this.btnOpenFolderDiag.TabIndex = 0;
 			this.btnOpenFolderDiag.TabStop = false;
 			this.btnOpenFolderDiag.Text = "...";
 			this.btnOpenFolderDiag.UseVisualStyleBackColor = true;
@@ -273,7 +225,7 @@
 			this.tbOutputPath.ImeMode = System.Windows.Forms.ImeMode.Disable;
 			this.tbOutputPath.Location = new System.Drawing.Point(23, 158);
 			this.tbOutputPath.Name = "tbOutputPath";
-			this.tbOutputPath.Size = new System.Drawing.Size(311, 27);
+			this.tbOutputPath.Size = new System.Drawing.Size(285, 27);
 			this.tbOutputPath.TabIndex = 11;
 			this.tbOutputPath.Text = "Desktop";
 			// 
@@ -282,7 +234,7 @@
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.btnCancel.Location = new System.Drawing.Point(310, 194);
+			this.btnCancel.Location = new System.Drawing.Point(284, 194);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(60, 28);
 			this.btnCancel.TabIndex = 14;
@@ -294,7 +246,7 @@
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.btnOK.Location = new System.Drawing.Point(242, 194);
+			this.btnOK.Location = new System.Drawing.Point(216, 194);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(60, 28);
 			this.btnOK.TabIndex = 13;
@@ -315,6 +267,10 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(245)))), ((int)(((byte)(235)))));
+			this.panel1.Controls.Add(this.tbLineBorder);
+			this.panel1.Controls.Add(this.tbFrameBorder);
+			this.panel1.Controls.Add(this.tbCaptureSizeY);
+			this.panel1.Controls.Add(this.tbCaptureSizeX);
 			this.panel1.Controls.Add(this.cbArrow);
 			this.panel1.Controls.Add(this.pictureBox3);
 			this.panel1.Controls.Add(this.pictureBox1);
@@ -323,19 +279,15 @@
 			this.panel1.Controls.Add(this.label2);
 			this.panel1.Controls.Add(this.btnOpenFolderDiag);
 			this.panel1.Controls.Add(this.label1);
-			this.panel1.Controls.Add(this.tbLineBorder);
 			this.panel1.Controls.Add(this.label7);
 			this.panel1.Controls.Add(this.tbOutputPath);
 			this.panel1.Controls.Add(this.label3);
-			this.panel1.Controls.Add(this.tbCaptureSizeY);
-			this.panel1.Controls.Add(this.tbFrameBorder);
 			this.panel1.Controls.Add(this.tbLineColerB);
 			this.panel1.Controls.Add(this.tbFrameColerR);
 			this.panel1.Controls.Add(this.btnCancel);
 			this.panel1.Controls.Add(this.tbLineColerR);
 			this.panel1.Controls.Add(this.tbFrameColerB);
 			this.panel1.Controls.Add(this.label9);
-			this.panel1.Controls.Add(this.tbCaptureSizeX);
 			this.panel1.Controls.Add(this.tbFrameColerG);
 			this.panel1.Controls.Add(this.tbLineColerG);
 			this.panel1.Controls.Add(this.btnOK);
@@ -343,14 +295,14 @@
 			this.panel1.Controls.Add(this.pnlTop);
 			this.panel1.Location = new System.Drawing.Point(2, 2);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(384, 230);
+			this.panel1.Size = new System.Drawing.Size(358, 230);
 			this.panel1.TabIndex = 16;
 			// 
 			// cbArrow
 			// 
 			this.cbArrow.AutoSize = true;
 			this.cbArrow.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.cbArrow.Location = new System.Drawing.Point(239, 128);
+			this.cbArrow.Location = new System.Drawing.Point(213, 128);
 			this.cbArrow.Name = "cbArrow";
 			this.cbArrow.Size = new System.Drawing.Size(66, 24);
 			this.cbArrow.TabIndex = 0;
@@ -372,7 +324,7 @@
 			// 
 			this.pictureBox1.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Capture;
 			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.pictureBox1.Location = new System.Drawing.Point(24, 34);
+			this.pictureBox1.Location = new System.Drawing.Point(24, 33);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(23, 23);
 			this.pictureBox1.TabIndex = 15;
@@ -395,7 +347,7 @@
 			this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlTop.Location = new System.Drawing.Point(0, 0);
 			this.pnlTop.Name = "pnlTop";
-			this.pnlTop.Size = new System.Drawing.Size(384, 20);
+			this.pnlTop.Size = new System.Drawing.Size(358, 20);
 			this.pnlTop.TabIndex = 0;
 			// 
 			// label4
@@ -409,12 +361,98 @@
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Settings";
 			// 
+			// tbCaptureSizeX
+			// 
+			this.tbCaptureSizeX.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbCaptureSizeX.Location = new System.Drawing.Point(134, 33);
+			this.tbCaptureSizeX.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeX.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeX.Name = "tbCaptureSizeX";
+			this.tbCaptureSizeX.Size = new System.Drawing.Size(60, 24);
+			this.tbCaptureSizeX.TabIndex = 1;
+			this.tbCaptureSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbCaptureSizeX.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+			// 
+			// tbCaptureSizeY
+			// 
+			this.tbCaptureSizeY.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbCaptureSizeY.Location = new System.Drawing.Point(202, 33);
+			this.tbCaptureSizeY.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeY.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeY.Name = "tbCaptureSizeY";
+			this.tbCaptureSizeY.Size = new System.Drawing.Size(60, 24);
+			this.tbCaptureSizeY.TabIndex = 2;
+			this.tbCaptureSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbCaptureSizeY.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+			// 
+			// tbFrameBorder
+			// 
+			this.tbFrameBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbFrameBorder.Location = new System.Drawing.Point(109, 68);
+			this.tbFrameBorder.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.tbFrameBorder.Name = "tbFrameBorder";
+			this.tbFrameBorder.Size = new System.Drawing.Size(51, 24);
+			this.tbFrameBorder.TabIndex = 3;
+			this.tbFrameBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbFrameBorder.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			// 
+			// tbLineBorder
+			// 
+			this.tbLineBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbLineBorder.Location = new System.Drawing.Point(109, 101);
+			this.tbLineBorder.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.tbLineBorder.Name = "tbLineBorder";
+			this.tbLineBorder.Size = new System.Drawing.Size(51, 24);
+			this.tbLineBorder.TabIndex = 7;
+			this.tbLineBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbLineBorder.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
 			// FormSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(388, 234);
+			this.ClientSize = new System.Drawing.Size(362, 234);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.KeyPreview = true;
@@ -430,6 +468,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			this.pnlTop.ResumeLayout(false);
 			this.pnlTop.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -437,20 +479,16 @@
 		#endregion
 
 		private System.Windows.Forms.Panel pnlLeft;
-		public System.Windows.Forms.TextBox tbFrameBorder;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label1;
-		public System.Windows.Forms.TextBox tbLineBorder;
 		public System.Windows.Forms.TextBox tbFrameColerB;
 		public System.Windows.Forms.TextBox tbFrameColerG;
 		public System.Windows.Forms.TextBox tbFrameColerR;
 		public System.Windows.Forms.TextBox tbLineColerB;
 		public System.Windows.Forms.TextBox tbLineColerG;
 		public System.Windows.Forms.TextBox tbLineColerR;
-		public System.Windows.Forms.TextBox tbCaptureSizeY;
-		public System.Windows.Forms.TextBox tbCaptureSizeX;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Button btnOpenFolderDiag;
 		public System.Windows.Forms.TextBox tbOutputPath;
@@ -464,5 +502,9 @@
 		public System.Windows.Forms.CheckBox cbArrow;
 		private System.Windows.Forms.Panel pnlTop;
 		private System.Windows.Forms.Label label4;
+		public System.Windows.Forms.NumericUpDown tbCaptureSizeX;
+		public System.Windows.Forms.NumericUpDown tbCaptureSizeY;
+		public System.Windows.Forms.NumericUpDown tbLineBorder;
+		public System.Windows.Forms.NumericUpDown tbFrameBorder;
 	}
 }

@@ -7,7 +7,7 @@
     <ProjectGuid>{D51955C0-2635-488D-BA6A-43E4CE0E65E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WindowsFormsApp1</RootNamespace>
-    <AssemblyName>TenpuGazoMaker_v104</AssemblyName>
+    <AssemblyName>TenpuGazoMaker_v105</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -72,6 +72,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRightClick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRightClick.Designer.cs">
+      <DependentUpon>FormRightClick.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRightClick.resx">
+      <DependentUpon>FormRightClick.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
@@ -145,6 +154,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="png\icon_LineMode.png" />
+    <None Include="png\icon_View_On.png" />
+    <None Include="png\icon_Undo_On.png" />
+    <None Include="png\icon_Trim_On.png" />
+    <None Include="png\icon_Set_On.png" />
+    <None Include="png\icon_Save_On.png" />
+    <None Include="png\icon_Quad_On.png" />
+    <None Include="png\icon_Frame_On.png" />
+    <None Include="png\icon_Copy_On.png" />
+    <None Include="png\icon_Close_On.png" />
+    <None Include="png\icon_Capture_On.png" />
     <None Include="png\icon_Line_On.png" />
   </ItemGroup>
   <ItemGroup>

@@ -121,17 +121,32 @@
   <data name="icon_Capture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Capture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Capture_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Capture_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Close_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Close_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Copy_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Copy_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_Frame" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Frame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Frame_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Frame_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_Line" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Line.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_LineMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_LineMode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_Line_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Line_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,19 +154,37 @@
   <data name="icon_Quad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Quad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Quad_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Quad_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Save_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Save_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_Set" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Set.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Set_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Set_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_Trim" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Trim.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Trim_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Trim_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_Undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Undo_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_Undo_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_View" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\png\icon_View.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_View_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\png\icon_View_On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
