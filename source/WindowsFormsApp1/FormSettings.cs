@@ -33,6 +33,8 @@ namespace WindowsFormsApp1
 			tbLineColerB.Text = Settings.lineColor.B.ToString();
 			tbOutputPath.Text = Settings.outputPath;
 			cbArrow.Checked = Settings.useArrow;
+			rbEN.Checked = Settings.useEnglish;
+			rbJP.Checked = !rbEN.Checked; // 反対のチェック状態にする
 		}
 
 		// フォルダ選択ダイアログを開いてパスを入力
@@ -102,8 +104,15 @@ namespace WindowsFormsApp1
 
 			if (i0 == 0 || i1 == 0 || i2 == 0 || i3 == 0)
 			{
-				MessageBox.Show("サイズや幅の指定を０にはできません。");
-
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show("You can't enter 0 in the size and border of line.");
+				}
+				else
+				{
+					MessageBox.Show("サイズや幅の指定を０にはできません。");
+				}
+				
 				// 閉じるのをキャンセル
 				e.Cancel = true;
 			}

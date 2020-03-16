@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
 		// 変数：パンツール
 		bool isDragging = false;
 		bool isDrawingLine = false;
+		bool isPan = false;
 		bool downSpaceKey = false;
 		Point posStart;
 
@@ -76,6 +77,9 @@ namespace WindowsFormsApp1
 
 			// カラーラベルに色を反映
 			RefreshColor();
+
+			// ツールチップに言語を反映
+			ChangeLanguage();
 
 			// PictureBoxにドラッグ＆ドロップを許可
 			pbDraw.AllowDrop = true;
@@ -241,11 +245,12 @@ namespace WindowsFormsApp1
 				// PictureBoxに画像がある場合
 				if (pbDraw.Image != null)
 				{
-					// スペースキーを押している時
+					// スペースキーを押している時（パン）
 					if (downSpaceKey)
 					{
 						isDragging = true;
 						posStart = e.Location;
+						isPan = true;
 					}
 					// スペースキーを押していない時
 					else
@@ -314,7 +319,7 @@ namespace WindowsFormsApp1
 			// PictureBoxに画像がある場合
 			if (pbDraw.Image != null)
 			{
-				// スペースキーを押している時
+				// スペースキーを押している時（パン）
 				if (isDragging && downSpaceKey)
 				{
 					Point pos = new Point(
@@ -328,35 +333,95 @@ namespace WindowsFormsApp1
 				// スペースキーを押していない時
 				else
 				{
-					// ライン描画モード時
-					if (lineMode)
+					if (isPan == false)
 					{
-						// マウスの左ボタンが押されている場合のみ処理
-						if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
+						// ライン描画モード時
+						if (lineMode)
 						{
-							// Shiftキーが押されていれば直線にする
-							if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+							// マウスの左ボタンが押されている場合のみ処理
+							if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
 							{
-								// 比較のためにXとYの移動距離を算出
-								int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
-								int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
-
-								// 角度を算出
-								double d = 0.0;
-
-								if (checkPosX != 0 && checkPosY != 0) // 0除算対策
+								// Shiftキーが押されていれば直線にする
+								if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 								{
-									// 角度を求める
-									d = Math.Atan2(checkPosY, checkPosX);
+									// 比較のためにXとYの移動距離を算出
+									int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
+									int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
 
-									// ラジアンから度数に変換
-									d = d * 180 / Math.PI;
+									// 角度を算出
+									double d = 0.0;
+
+									if (checkPosX != 0 && checkPosY != 0) // 0除算対策
+									{
+										// 角度を求める
+										d = Math.Atan2(checkPosY, checkPosX);
+
+										// ラジアンから度数に変換
+										d = d * 180 / Math.PI;
+									}
+
+									// XとYのどちらが長いか比較する
+									if (checkPosX >= checkPosY) // 横長の場合
+									{
+										if (40.0 < d && d < 50.0)
+										{
+											// 座標を取得
+											// 開始位置に対して現在位置が正負どちらか判定して処理
+											endPoint.X = cursorPos().X;
+											endPoint.Y = staPoint.Y +
+												(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
+										}
+										else
+										{
+											// 座標を取得
+											endPoint.X = cursorPos().X;
+											endPoint.Y = staPoint.Y;
+										}
+									}
+									else // 縦長の場合
+									{
+										if (40.0 < d && d < 50.0)
+										{
+											// 座標を取得
+											// 開始位置に対して現在位置が正負どちらか判定して処理
+											endPoint.X = staPoint.X +
+												(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
+											endPoint.Y = cursorPos().Y;
+										}
+										else
+										{
+											// 座標を取得
+											endPoint.X = staPoint.X;
+											endPoint.Y = cursorPos().Y;
+										}
+									}
+								}
+								else
+								{
+									// 座標を取得
+									endPoint.X = cursorPos().X;
+									endPoint.Y = cursorPos().Y;
 								}
 
-								// XとYのどちらが長いか比較する
-								if (checkPosX >= checkPosY) // 横長の場合
+								// 描画
+								DrawLine();
+							}
+						}
+						// 選択範囲モード時
+						else
+						{
+							// マウスの左ボタンが押されている場合のみ処理
+							if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
+							{
+								// Shiftキーが押されていれば直線にする
+								if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
 								{
-									if (40.0 < d && d < 50.0)
+									// 比較のためにXとYの移動距離を算出
+									int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
+									int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
+
+									// XとYのどちらが長いか比較する
+									if (checkPosX >= checkPosY) // 横長の場合
 									{
 										// 座標を取得
 										// 開始位置に対して現在位置が正負どちらか判定して処理
@@ -364,16 +429,7 @@ namespace WindowsFormsApp1
 										endPoint.Y = staPoint.Y +
 											(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
 									}
-									else
-									{
-										// 座標を取得
-										endPoint.X = cursorPos().X;
-										endPoint.Y = staPoint.Y;
-									}
-								}
-								else // 縦長の場合
-								{
-									if (40.0 < d && d < 50.0)
+									else // 縦長の場合
 									{
 										// 座標を取得
 										// 開始位置に対して現在位置が正負どちらか判定して処理
@@ -381,65 +437,17 @@ namespace WindowsFormsApp1
 											(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
 										endPoint.Y = cursorPos().Y;
 									}
-									else
-									{
-										// 座標を取得
-										endPoint.X = staPoint.X;
-										endPoint.Y = cursorPos().Y;
-									}
 								}
-							}
-							else
-							{
-								// 座標を取得
-								endPoint.X = cursorPos().X;
-								endPoint.Y = cursorPos().Y;
-							}
-
-							// 描画
-							DrawLine();
-						}
-					}
-					// 選択範囲モード時
-					else
-					{
-						// マウスの左ボタンが押されている場合のみ処理
-						if ((Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
-						{
-							// Shiftキーが押されていれば直線にする
-							if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-							{
-								// 比較のためにXとYの移動距離を算出
-								int checkPosX = Math.Abs(cursorPos().X - staPoint.X);
-								int checkPosY = Math.Abs(cursorPos().Y - staPoint.Y);
-
-								// XとYのどちらが長いか比較する
-								if (checkPosX >= checkPosY) // 横長の場合
+								else
 								{
 									// 座標を取得
-									// 開始位置に対して現在位置が正負どちらか判定して処理
 									endPoint.X = cursorPos().X;
-									endPoint.Y = staPoint.Y +
-										(Math.Sign(cursorPos().Y - staPoint.Y) * checkPosX);
-								}
-								else // 縦長の場合
-								{
-									// 座標を取得
-									// 開始位置に対して現在位置が正負どちらか判定して処理
-									endPoint.X = staPoint.X +
-										(Math.Sign(cursorPos().X - staPoint.X) * checkPosY);
 									endPoint.Y = cursorPos().Y;
 								}
-							}
-							else
-							{
-								// 座標を取得
-								endPoint.X = cursorPos().X;
-								endPoint.Y = cursorPos().Y;
-							}
 
-							// 選択範囲の描画
-							DrawSelect();
+								// 選択範囲の描画
+								DrawSelect();
+							}
 						}
 					}
 				}
@@ -453,16 +461,14 @@ namespace WindowsFormsApp1
 			if (pbDraw.Image != null)
 			{
 				// スペースキーを押している時
-				if (downSpaceKey)
+				if (isDragging)
 				{
 					isDragging = false;
+					isPan = false;
 				}
 				// スペースキーを押していない時
 				else
 				{
-					// スペースキーを押せるようライン描画終了を明示
-					isDrawingLine = false;
-
 					// ライン描画モード時
 					if (lineMode)
 					{
@@ -533,6 +539,9 @@ namespace WindowsFormsApp1
 						// 選択範囲フラグON
 						selecting = true;
 					}
+
+					// スペースキーを押せるようライン描画終了を明示
+					isDrawingLine = false;
 				}
 			}
 		}
@@ -579,8 +588,18 @@ namespace WindowsFormsApp1
 			}
 			catch (Exception)
 			{
-				MessageBox.Show("ドラッグ＆ドロップに失敗しました。" + "\r\n" +
-								"一般的な画像ファイルかご確認ください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"Failed to drag & drop the image.\r\n" +
+						"Please check the image is a popular format.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"ドラッグ＆ドロップに失敗しました\r\n" +
+						"一般的な画像ファイルかご確認ください");
+				}
 			}
 		}
 		
@@ -625,8 +644,18 @@ namespace WindowsFormsApp1
 			}
 			catch (Exception)
 			{
-				MessageBox.Show("ドラッグ＆ドロップに失敗しました。" + "\r\n" +
-								"一般的な画像ファイルかご確認ください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"Failed to drag & drop the image.\r\n" +
+						"Please check the image is a popular format.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"ドラッグ＆ドロップに失敗しました\r\n" +
+						"一般的な画像ファイルかご確認ください");
+				}
 			}
 		}
 
@@ -745,10 +774,19 @@ namespace WindowsFormsApp1
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
 		{
 			// 画像が存在してライン描画中じゃない場合は手のひらカーソルを解除する
-			if (pbDraw != null && isDrawingLine == false)
+			if (pbDraw != null && isDrawingLine == false && downSpaceKey == true)
 			{
-				pbDraw.Cursor = Cursors.Default;
-				downSpaceKey = false;
+				if (lineMode)
+				{
+					// カーソルを十字型に変える
+					pbDraw.Cursor = Cursors.Cross;
+					downSpaceKey = false;
+				}
+				else
+				{
+					pbDraw.Cursor = Cursors.Default;
+					downSpaceKey = false;
+				}
 			}
 		}
 
@@ -841,7 +879,16 @@ namespace WindowsFormsApp1
 				}
 				else
 				{
-					MessageBox.Show("キャプチャ枠を表示して取り込み先を決めてください");
+					if (Settings.useEnglish)
+					{
+						MessageBox.Show(
+							"Please show the capture frame\r\n" +
+							"and position for capturing.");
+					}
+					else
+					{
+						MessageBox.Show("キャプチャ枠を表示して取り込み先を決めてください");
+					}
 				}
 			}
 		}
@@ -906,7 +953,14 @@ namespace WindowsFormsApp1
 			}
 			else
 			{
-				MessageBox.Show("画像内で選択範囲を作成してから実行してください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show("Please click after making the selection on the image.");
+				}
+				else
+				{
+					MessageBox.Show("画像内で選択範囲を作成してから実行してください。");
+				}
 			}
 		}
 
@@ -979,7 +1033,14 @@ namespace WindowsFormsApp1
 			}
 			else
 			{
-				MessageBox.Show("画像内で選択範囲を作成してから実行してください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show("Please click after making the selection on the image.");
+				}
+				else
+				{
+					MessageBox.Show("画像内で選択範囲を作成してから実行してください。");
+				}
 			}
 		}
 
@@ -1035,8 +1096,18 @@ namespace WindowsFormsApp1
 			}
 			else // 無い場合
 			{
-				MessageBox.Show("画像がありません。" + "\r\n" +
-								"先に画像を取り込んでください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"No image on this tool.\r\n" +
+						"First of all, please capture an image.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"画像がありません\r\n" +
+						"先に画像を取り込んでください");
+				}
 			}
 		}
 		// ライン描画モードON
@@ -1148,19 +1219,32 @@ namespace WindowsFormsApp1
 							byte.Parse(form.tbLineColerB.Text));
 					Settings.outputPath = form.tbOutputPath.Text;
 					Settings.useArrow = form.cbArrow.Checked;
+					Settings.useEnglish = form.rbEN.Checked;
 
 					// 設定を出力
 					Settings.OutputSettings();
 
 					// カラーラベルに色を反映
 					RefreshColor();
+
+					// ツールチップに言語を反映
+					ChangeLanguage();
 				}
 			}
 			catch (Exception)
 			{
-
-				MessageBox.Show("設定に失敗しました。" + "\r\n" +
-								"空欄を指定した可能性があります。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"Failed to set these parameters.\r\n" +
+						"It's a high possibility that there is a blank parameter.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"設定に失敗しました\r\n" +
+						"空欄を指定した可能性があります");
+				}
 			}
 
 			// Disposeでフォームを解放
@@ -1207,8 +1291,18 @@ namespace WindowsFormsApp1
 			}
 			else // 無い場合
 			{
-				MessageBox.Show("画像がありません。" + "\r\n" +
-								"先に画像を取り込んでください。");
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"No image on this tool.\r\n" +
+						"First of all, please capture an image.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"画像がありません\r\n" +
+						"先に画像を取り込んでください");
+				}
 			}
 		}
 
@@ -1295,6 +1389,120 @@ namespace WindowsFormsApp1
 		{
 			pnlColor1.BackColor = Settings.frameColor;
 			pnlColor2.BackColor = Settings.lineColor;
+		}
+
+		// 関数：ツールチップの言語切り替え
+		private void ChangeLanguage()
+		{
+			if (Settings.useEnglish)
+			{
+				toolTip1.SetToolTip(btnCapture,
+					"Show or hide the capture frame.\r\n" +
+					"And you can change the frame size.\r\n" +
+					"[ Ctrl + A ]");
+
+				toolTip1.SetToolTip(btnView,
+					"If the capture frame is shown,\r\n" +
+					"you get background image in the frame.\r\n" +
+					"[ Ctrl + D ]\r\n" +
+					"\r\n" +
+					"You can drop the image to this aplication.\r\n" +
+					"In addition, You can paste the image from clipboard with Ctrl + V.");
+
+				toolTip1.SetToolTip(btnTrim,
+					"You can trim the image on this tool using the selection.\r\n" +
+					"[ Ctrl + T ]");
+
+				toolTip1.SetToolTip(btnFrame,
+					"Draw line on the edge of the image.\r\n" +
+					"You can change the color and border of line with the setting window.\r\n" +
+					"[ Ctrl + F ]");
+
+				toolTip1.SetToolTip(btnQuad,
+					"Draw line on the edge of the selection.\r\n" +
+					"You can change the color and border of line with the setting window.\r\n" +
+					"[ Ctrl + Q ]");
+
+				toolTip1.SetToolTip(btnLine,
+					"Change the drawing line mode on this image or not.\r\n" +
+					"You can change the color and border of line with the setting window.\r\n" +
+					"[ Ctrl + L ]");
+
+				toolTip1.SetToolTip(btnUndo,
+					"Undo your last editing the image.\r\n" +
+					"[ Ctrl + Z ]");
+
+				toolTip1.SetToolTip(btnCopy,
+					"Paste the image on this tool to a clipboard.\r\n" +
+					"[ Ctrl + C ]");
+
+				toolTip1.SetToolTip(btnSave,
+					"Save the image on this tool as a PNG file.\r\n" +
+					"You can set the save location with the setting window.\r\n" +
+					"[ Ctrl + S ]");
+
+				toolTip1.SetToolTip(btnClose,
+					"Clear the image on this tool.\r\n" +
+					"[ Ctrl + W ]");
+
+				toolTip1.SetToolTip(btnSetting,
+					"Open the tool setting window.\r\n" +
+					"[ Esc ]");
+			}
+			else
+			{
+				toolTip1.SetToolTip(btnCapture,
+					"キャプチャするための枠を表示/非表示します。\r\n" +
+					"枠は大きさを自由に変えられます。\r\n" +
+					"[ Ctrl + A ]");
+
+				toolTip1.SetToolTip(btnView,
+					"キャプチャ枠を表示していれば枠内の背景をツールに取り込みます。\r\n" +
+					"[ Ctrl + D ]\r\n" +
+					"\r\n" +
+					"画像を直接ドラッグ＆ドロップしてもOKです。\r\n" +
+					"また、「Ctrl + V」でクリップボードの画像をツールに貼り付けます。");
+
+				toolTip1.SetToolTip(btnTrim,
+					"画像上の選択範囲をトリミングします。\r\n" +
+					"[ Ctrl + T ]");
+
+				toolTip1.SetToolTip(btnFrame,
+					"取り込んだ画像の周囲に枠線を追加します。\r\n" +
+					"色と幅は設定画面で指定できます。\r\n" +
+					"[ Ctrl + F ]");
+
+				toolTip1.SetToolTip(btnQuad,
+					"画像上の選択範囲に枠線を描画します。\r\n" +
+					"色と幅は設定画面で指定できます。\r\n" +
+					"[ Ctrl + Q ]");
+
+				toolTip1.SetToolTip(btnLine,
+					"画像上でラインを引くモードになります。\r\n" +
+					"色と幅は設定画面で指定できます。\r\n" +
+					"[ Ctrl + L ]");
+
+				toolTip1.SetToolTip(btnUndo,
+					"ツール上の画像の編集に対してUndo/Redoします。\r\n" +
+					"[ Ctrl + Z ]");
+
+				toolTip1.SetToolTip(btnCopy,
+					"ツール上の画像をクリップボードにコピーします。\r\n" +
+					"[ Ctrl + C ]");
+
+				toolTip1.SetToolTip(btnSave,
+					"ツール上の画像をPNGで保存します。\r\n" +
+					"保存先は設定画面で指定できます。\r\n" +
+					"[ Ctrl + S ]");
+
+				toolTip1.SetToolTip(btnClose,
+					"ツール上の画像をクリアします。\r\n" +
+					"[ Ctrl + W ]");
+
+				toolTip1.SetToolTip(btnSetting,
+					"設定画面を開きます。\r\n" +
+					"[ Esc ]");
+			}
 		}
 
 

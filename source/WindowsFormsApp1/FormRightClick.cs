@@ -5,9 +5,6 @@ namespace WindowsFormsApp1
 {
 	public partial class FormRightClick : Form
 	{
-		// 変数
-		bool isCursor;
-
 		//******************************//
 		//								//
 		//		　 フォーム関係　		//

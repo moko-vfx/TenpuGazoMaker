@@ -46,25 +46,28 @@
 			this.btnOK = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.tbLineBorder = new System.Windows.Forms.NumericUpDown();
+			this.tbFrameBorder = new System.Windows.Forms.NumericUpDown();
+			this.tbCaptureSizeY = new System.Windows.Forms.NumericUpDown();
+			this.tbCaptureSizeX = new System.Windows.Forms.NumericUpDown();
 			this.cbArrow = new System.Windows.Forms.CheckBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pnlTop = new System.Windows.Forms.Panel();
 			this.label4 = new System.Windows.Forms.Label();
-			this.tbCaptureSizeX = new System.Windows.Forms.NumericUpDown();
-			this.tbCaptureSizeY = new System.Windows.Forms.NumericUpDown();
-			this.tbFrameBorder = new System.Windows.Forms.NumericUpDown();
-			this.tbLineBorder = new System.Windows.Forms.NumericUpDown();
+			this.label5 = new System.Windows.Forms.Label();
+			this.rbEN = new System.Windows.Forms.RadioButton();
+			this.rbJP = new System.Windows.Forms.RadioButton();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			this.pnlTop.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnlLeft
@@ -267,6 +270,8 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(245)))), ((int)(((byte)(235)))));
+			this.panel1.Controls.Add(this.rbJP);
+			this.panel1.Controls.Add(this.rbEN);
 			this.panel1.Controls.Add(this.tbLineBorder);
 			this.panel1.Controls.Add(this.tbFrameBorder);
 			this.panel1.Controls.Add(this.tbCaptureSizeY);
@@ -281,6 +286,7 @@
 			this.panel1.Controls.Add(this.label1);
 			this.panel1.Controls.Add(this.label7);
 			this.panel1.Controls.Add(this.tbOutputPath);
+			this.panel1.Controls.Add(this.label5);
 			this.panel1.Controls.Add(this.label3);
 			this.panel1.Controls.Add(this.tbLineColerB);
 			this.panel1.Controls.Add(this.tbFrameColerR);
@@ -297,6 +303,92 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(358, 230);
 			this.panel1.TabIndex = 16;
+			// 
+			// tbLineBorder
+			// 
+			this.tbLineBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbLineBorder.Location = new System.Drawing.Point(109, 101);
+			this.tbLineBorder.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.tbLineBorder.Name = "tbLineBorder";
+			this.tbLineBorder.Size = new System.Drawing.Size(51, 24);
+			this.tbLineBorder.TabIndex = 7;
+			this.tbLineBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbLineBorder.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// tbFrameBorder
+			// 
+			this.tbFrameBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbFrameBorder.Location = new System.Drawing.Point(109, 68);
+			this.tbFrameBorder.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.tbFrameBorder.Name = "tbFrameBorder";
+			this.tbFrameBorder.Size = new System.Drawing.Size(51, 24);
+			this.tbFrameBorder.TabIndex = 3;
+			this.tbFrameBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbFrameBorder.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			// 
+			// tbCaptureSizeY
+			// 
+			this.tbCaptureSizeY.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbCaptureSizeY.Location = new System.Drawing.Point(202, 33);
+			this.tbCaptureSizeY.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeY.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeY.Name = "tbCaptureSizeY";
+			this.tbCaptureSizeY.Size = new System.Drawing.Size(60, 24);
+			this.tbCaptureSizeY.TabIndex = 2;
+			this.tbCaptureSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbCaptureSizeY.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+			// 
+			// tbCaptureSizeX
+			// 
+			this.tbCaptureSizeX.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.tbCaptureSizeX.Location = new System.Drawing.Point(134, 33);
+			this.tbCaptureSizeX.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeX.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.tbCaptureSizeX.Name = "tbCaptureSizeX";
+			this.tbCaptureSizeX.Size = new System.Drawing.Size(60, 24);
+			this.tbCaptureSizeX.TabIndex = 1;
+			this.tbCaptureSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.tbCaptureSizeX.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
 			// 
 			// cbArrow
 			// 
@@ -361,91 +453,40 @@
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Settings";
 			// 
-			// tbCaptureSizeX
+			// label5
 			// 
-			this.tbCaptureSizeX.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbCaptureSizeX.Location = new System.Drawing.Point(134, 33);
-			this.tbCaptureSizeX.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-			this.tbCaptureSizeX.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-			this.tbCaptureSizeX.Name = "tbCaptureSizeX";
-			this.tbCaptureSizeX.Size = new System.Drawing.Size(60, 24);
-			this.tbCaptureSizeX.TabIndex = 1;
-			this.tbCaptureSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.tbCaptureSizeX.Value = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.label5.Location = new System.Drawing.Point(22, 198);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(72, 20);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "Language";
 			// 
-			// tbCaptureSizeY
+			// rbEN
 			// 
-			this.tbCaptureSizeY.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbCaptureSizeY.Location = new System.Drawing.Point(202, 33);
-			this.tbCaptureSizeY.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-			this.tbCaptureSizeY.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-			this.tbCaptureSizeY.Name = "tbCaptureSizeY";
-			this.tbCaptureSizeY.Size = new System.Drawing.Size(60, 24);
-			this.tbCaptureSizeY.TabIndex = 2;
-			this.tbCaptureSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.tbCaptureSizeY.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
+			this.rbEN.AutoSize = true;
+			this.rbEN.Checked = true;
+			this.rbEN.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.rbEN.Location = new System.Drawing.Point(101, 197);
+			this.rbEN.Name = "rbEN";
+			this.rbEN.Size = new System.Drawing.Size(45, 24);
+			this.rbEN.TabIndex = 16;
+			this.rbEN.TabStop = true;
+			this.rbEN.Text = "EN";
+			this.rbEN.UseVisualStyleBackColor = true;
 			// 
-			// tbFrameBorder
+			// rbJP
 			// 
-			this.tbFrameBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbFrameBorder.Location = new System.Drawing.Point(109, 68);
-			this.tbFrameBorder.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.tbFrameBorder.Name = "tbFrameBorder";
-			this.tbFrameBorder.Size = new System.Drawing.Size(51, 24);
-			this.tbFrameBorder.TabIndex = 3;
-			this.tbFrameBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.tbFrameBorder.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// tbLineBorder
-			// 
-			this.tbLineBorder.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.tbLineBorder.Location = new System.Drawing.Point(109, 101);
-			this.tbLineBorder.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.tbLineBorder.Name = "tbLineBorder";
-			this.tbLineBorder.Size = new System.Drawing.Size(51, 24);
-			this.tbLineBorder.TabIndex = 7;
-			this.tbLineBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.tbLineBorder.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+			this.rbJP.AutoSize = true;
+			this.rbJP.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.rbJP.Location = new System.Drawing.Point(149, 197);
+			this.rbJP.Name = "rbJP";
+			this.rbJP.Size = new System.Drawing.Size(41, 24);
+			this.rbJP.TabIndex = 16;
+			this.rbJP.Text = "JP";
+			this.rbJP.UseVisualStyleBackColor = true;
 			// 
 			// FormSettings
 			// 
@@ -463,15 +504,15 @@
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormSettings_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			this.pnlTop.ResumeLayout(false);
 			this.pnlTop.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeX)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbCaptureSizeY)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -506,5 +547,8 @@
 		public System.Windows.Forms.NumericUpDown tbCaptureSizeY;
 		public System.Windows.Forms.NumericUpDown tbLineBorder;
 		public System.Windows.Forms.NumericUpDown tbFrameBorder;
+		private System.Windows.Forms.Label label5;
+		public System.Windows.Forms.RadioButton rbJP;
+		public System.Windows.Forms.RadioButton rbEN;
 	}
 }

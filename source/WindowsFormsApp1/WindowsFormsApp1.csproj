@@ -7,7 +7,7 @@
     <ProjectGuid>{D51955C0-2635-488D-BA6A-43E4CE0E65E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WindowsFormsApp1</RootNamespace>
-    <AssemblyName>TenpuGazoMaker_v105</AssemblyName>
+    <AssemblyName>TenpuGazoMaker_v106</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
