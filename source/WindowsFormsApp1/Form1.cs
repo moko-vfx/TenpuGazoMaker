@@ -1181,6 +1181,9 @@ namespace WindowsFormsApp1
 		{
 			// PixtureBoxをクリア
 			pbDraw.Image = null;
+
+			// ツール下部の画像サイズ表示を無しにする
+			ResetSize();
 		}
 
 		private void OpenSetting()
@@ -1317,6 +1320,9 @@ namespace WindowsFormsApp1
 
 			// ライン描画モードのアイコン差し替え
 			btnLine.BackgroundImage = Properties.Resources.icon_Line;
+
+			// カーソルをデフォルトに戻す
+			pbDraw.Cursor = Cursors.Default;
 
 			// 選択範囲を解除する場合
 			if (selectOff)
@@ -1503,6 +1509,13 @@ namespace WindowsFormsApp1
 					"設定画面を開きます。\r\n" +
 					"[ Esc ]");
 			}
+		}
+
+		// 関数：ツール下部の画像サイズ表示を無しにする
+		private void ResetSize()
+		{
+			// PixtureBox1のサイズを表示
+			lblSize.Text = "Image Size :";
 		}
 
 
