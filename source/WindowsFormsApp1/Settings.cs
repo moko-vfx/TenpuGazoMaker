@@ -35,6 +35,13 @@ namespace WindowsFormsApp1
 		public static bool useArrow;
 		public static bool useEnglish;
 
+		// 変数：リサイズ設定
+		public static int resizeWidth;
+		public static int resizeHeight;
+		public static bool resizeRockWidth;
+		public static bool resizeRockHeight;
+		public static bool resizeLink;
+
 		// 関数：初期化
 		public static void Initialize()
 		{
@@ -49,6 +56,12 @@ namespace WindowsFormsApp1
 			outputPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			useArrow = false;
 			useEnglish = true;
+
+			resizeWidth = 400;
+			resizeHeight = 300;
+			resizeRockWidth = false;
+			resizeRockHeight = false;
+			resizeLink = false;
 		}
 
 		//******************************//
@@ -104,6 +117,12 @@ namespace WindowsFormsApp1
 					outputPath = list[12];
 					useArrow = bool.Parse(list[13]);
 					useEnglish = bool.Parse(list[14]);
+
+					resizeWidth = int.Parse(list[15]);
+					resizeHeight = int.Parse(list[16]);
+					resizeRockWidth = bool.Parse(list[17]);
+					resizeRockHeight = bool.Parse(list[18]);
+					resizeLink = bool.Parse(list[19]);
 				}
 				catch (Exception)
 				{
@@ -134,7 +153,6 @@ namespace WindowsFormsApp1
 		// 関数：ツール設定を出力する
 		public static void OutputSettings()
 		{
-
 			try
 			{
 				// 出力設定
@@ -165,7 +183,12 @@ namespace WindowsFormsApp1
 						"[LCoB] " + lineColor.B.ToString() + rn +
 						"[Path] " + outputPath + rn +
 						"[Arow] " + useArrow.ToString() + rn +
-						"[LaEN] " + useEnglish.ToString();
+						"[LaEN] " + useEnglish.ToString() + rn +
+						"[ResW] " + resizeWidth.ToString() + rn +
+						"[ResH] " + resizeHeight.ToString() + rn +
+						"[RocW] " + resizeRockWidth.ToString() + rn +
+						"[RocH] " + resizeRockHeight.ToString() + rn +
+						"[Link] " + resizeLink.ToString();
 
 					// 書き込む
 					sw.WriteLine(data);

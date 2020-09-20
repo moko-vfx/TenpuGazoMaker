@@ -213,6 +213,26 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap icon_Scale {
+            get {
+                object obj = ResourceManager.GetObject("icon_Scale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_Scale_On {
+            get {
+                object obj = ResourceManager.GetObject("icon_Scale_On", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap icon_Set {
             get {
                 object obj = ResourceManager.GetObject("icon_Set", resourceCulture);

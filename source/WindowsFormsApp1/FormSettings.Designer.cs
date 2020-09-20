@@ -43,9 +43,11 @@
 			this.btnOpenFolderDiag = new System.Windows.Forms.Button();
 			this.tbOutputPath = new System.Windows.Forms.TextBox();
 			this.btnCancel = new System.Windows.Forms.Button();
-			this.btnOK = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.rbJP = new System.Windows.Forms.RadioButton();
+			this.rbEN = new System.Windows.Forms.RadioButton();
 			this.tbLineBorder = new System.Windows.Forms.NumericUpDown();
 			this.tbFrameBorder = new System.Windows.Forms.NumericUpDown();
 			this.tbCaptureSizeY = new System.Windows.Forms.NumericUpDown();
@@ -54,11 +56,9 @@
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.pnlTop = new System.Windows.Forms.Panel();
 			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.rbEN = new System.Windows.Forms.RadioButton();
-			this.rbJP = new System.Windows.Forms.RadioButton();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tbLineBorder)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tbFrameBorder)).BeginInit();
@@ -236,6 +236,7 @@
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatAppearance.BorderSize = 0;
 			this.btnCancel.Font = new System.Drawing.Font("メイリオ", 9.75F);
 			this.btnCancel.Location = new System.Drawing.Point(284, 194);
 			this.btnCancel.Name = "btnCancel";
@@ -243,18 +244,6 @@
 			this.btnCancel.TabIndex = 14;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
-			// 
-			// btnOK
-			// 
-			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOK.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.btnOK.Location = new System.Drawing.Point(216, 194);
-			this.btnOK.Name = "btnOK";
-			this.btnOK.Size = new System.Drawing.Size(60, 28);
-			this.btnOK.TabIndex = 13;
-			this.btnOK.Text = "OK";
-			this.btnOK.UseVisualStyleBackColor = true;
 			// 
 			// label3
 			// 
@@ -270,6 +259,7 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(245)))), ((int)(((byte)(235)))));
+			this.panel1.Controls.Add(this.btnOK);
 			this.panel1.Controls.Add(this.rbJP);
 			this.panel1.Controls.Add(this.rbEN);
 			this.panel1.Controls.Add(this.tbLineBorder);
@@ -296,13 +286,47 @@
 			this.panel1.Controls.Add(this.label9);
 			this.panel1.Controls.Add(this.tbFrameColerG);
 			this.panel1.Controls.Add(this.tbLineColerG);
-			this.panel1.Controls.Add(this.btnOK);
 			this.panel1.Controls.Add(this.pnlLeft);
 			this.panel1.Controls.Add(this.pnlTop);
 			this.panel1.Location = new System.Drawing.Point(2, 2);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(358, 230);
 			this.panel1.TabIndex = 16;
+			// 
+			// btnOK
+			// 
+			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOK.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.btnOK.Location = new System.Drawing.Point(216, 194);
+			this.btnOK.Name = "btnOK";
+			this.btnOK.Size = new System.Drawing.Size(60, 28);
+			this.btnOK.TabIndex = 13;
+			this.btnOK.Text = "OK";
+			this.btnOK.UseVisualStyleBackColor = true;
+			// 
+			// rbJP
+			// 
+			this.rbJP.AutoSize = true;
+			this.rbJP.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.rbJP.Location = new System.Drawing.Point(149, 197);
+			this.rbJP.Name = "rbJP";
+			this.rbJP.Size = new System.Drawing.Size(41, 24);
+			this.rbJP.TabIndex = 16;
+			this.rbJP.Text = "JP";
+			this.rbJP.UseVisualStyleBackColor = true;
+			// 
+			// rbEN
+			// 
+			this.rbEN.AutoSize = true;
+			this.rbEN.Checked = true;
+			this.rbEN.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.rbEN.Location = new System.Drawing.Point(101, 197);
+			this.rbEN.Name = "rbEN";
+			this.rbEN.Size = new System.Drawing.Size(45, 24);
+			this.rbEN.TabIndex = 16;
+			this.rbEN.Text = "EN";
+			this.rbEN.UseVisualStyleBackColor = true;
 			// 
 			// tbLineBorder
 			// 
@@ -432,6 +456,17 @@
 			this.pictureBox2.TabIndex = 15;
 			this.pictureBox2.TabStop = false;
 			// 
+			// label5
+			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("メイリオ", 9.75F);
+			this.label5.Location = new System.Drawing.Point(22, 198);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(72, 20);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "Language";
+			// 
 			// pnlTop
 			// 
 			this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(58)))), ((int)(((byte)(59)))));
@@ -453,46 +488,13 @@
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Settings";
 			// 
-			// label5
-			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.label5.Location = new System.Drawing.Point(22, 198);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(72, 20);
-			this.label5.TabIndex = 0;
-			this.label5.Text = "Language";
-			// 
-			// rbEN
-			// 
-			this.rbEN.AutoSize = true;
-			this.rbEN.Checked = true;
-			this.rbEN.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.rbEN.Location = new System.Drawing.Point(101, 197);
-			this.rbEN.Name = "rbEN";
-			this.rbEN.Size = new System.Drawing.Size(45, 24);
-			this.rbEN.TabIndex = 16;
-			this.rbEN.TabStop = true;
-			this.rbEN.Text = "EN";
-			this.rbEN.UseVisualStyleBackColor = true;
-			// 
-			// rbJP
-			// 
-			this.rbJP.AutoSize = true;
-			this.rbJP.Font = new System.Drawing.Font("メイリオ", 9.75F);
-			this.rbJP.Location = new System.Drawing.Point(149, 197);
-			this.rbJP.Name = "rbJP";
-			this.rbJP.Size = new System.Drawing.Size(41, 24);
-			this.rbJP.TabIndex = 16;
-			this.rbJP.Text = "JP";
-			this.rbJP.UseVisualStyleBackColor = true;
-			// 
 			// FormSettings
 			// 
+			this.AcceptButton = this.btnOK;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(32)))));
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(362, 234);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -534,7 +536,6 @@
 		private System.Windows.Forms.Button btnOpenFolderDiag;
 		public System.Windows.Forms.TextBox tbOutputPath;
 		private System.Windows.Forms.Button btnCancel;
-		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
@@ -550,5 +551,6 @@
 		private System.Windows.Forms.Label label5;
 		public System.Windows.Forms.RadioButton rbJP;
 		public System.Windows.Forms.RadioButton rbEN;
+		private System.Windows.Forms.Button btnOK;
 	}
 }

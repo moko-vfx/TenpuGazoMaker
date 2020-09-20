@@ -167,7 +167,17 @@ namespace WindowsFormsApp1
 			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
 			ActiveControl = null;
 		}
-		
+
+		// ボタン：画像サイズ変更
+		private void btnScale_Click(object sender, EventArgs e)
+		{
+			EditMethod = ScalePicture;
+			CheckPicture(EditMethod, 1, 1, false);
+
+			// ボタンを押した後にスペースキーでボタンをクリックさせない対処
+			ActiveControl = null;
+		}
+
 		// ボタン：アンドゥ/リドゥ
 		private void BtnUndo_Click(object sender, EventArgs e)
 		{
@@ -727,6 +737,13 @@ namespace WindowsFormsApp1
 				ChangeLineMode();
 			}
 
+			// 画像サイズ変更
+			if (e.Control && e.KeyCode == Keys.R)
+			{
+				EditMethod = ScalePicture;
+				CheckPicture(EditMethod, 1, 1, false);
+			}
+
 			// Undo/Redo
 			if (e.Control && e.KeyCode == Keys.Z)
 			{
@@ -1139,6 +1156,79 @@ namespace WindowsFormsApp1
 			pbDraw.Cursor = Cursors.Default;
 		}
 
+		// 画像サイズ変更
+		private void ScalePicture()
+		{
+			// ミニ設定フォームを隠す
+			miniSettingsForm.Hide();
+
+			int w = imgNow.Width;
+			int h = imgNow.Height;
+
+			// 設定フォームを作成
+			var form = new FormResizePicture(w, h);
+
+			// オーナーウィンドウの真ん中に表示
+			form.StartPosition = FormStartPosition.Manual;
+			form.Location = new Point(this.Location.X + 80, this.Location.Y + 85);
+			// 設定フォームをタスクバーに表示しない
+			form.ShowInTaskbar = false;
+
+			// 設定フォームをモーダルで開いて何のボタンで終了したかを受け取る
+			DialogResult result = form.ShowDialog();
+
+			// OK ボタンで閉じたとき
+			if (result == DialogResult.OK)
+			{
+				Settings.resizeWidth = int.Parse(form.tbWidth.Text);
+				Settings.resizeHeight = int.Parse(form.tbHeight.Text);
+				Settings.resizeRockWidth = form.cbRockWidth.Checked;
+				Settings.resizeRockHeight = form.cbRockHeight.Checked;
+				Settings.resizeLink = form.cbLink.Checked;
+
+				int newW = Settings.resizeWidth;
+				int newH = Settings.resizeHeight;
+
+				// 設定を出力
+				Settings.OutputSettings();
+
+				// 画像のリサイズ処理
+				try
+				{
+					// PictureBoxにある画像サイズでImageオブジェクトを作成する
+					Bitmap canvas = new Bitmap(imgNow, newW, newH);
+
+					// ImageオブジェクトのGraphicsオブジェクトを作成する
+					Graphics g = Graphics.FromImage(canvas);
+
+					//補間方法として高品質双三次補間を指定する
+					g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+					//画像を縮小して描画する
+					g.DrawImage(imgNow, 0, 0, newW, newH);
+
+					// リソースを解放する
+					g.Dispose();
+
+					// PictureBoxに表示する
+					pbDraw.Image = canvas;
+				}
+				catch (Exception)
+				{
+					if (Settings.useEnglish)
+					{
+						MessageBox.Show("You failed to change the image size.");
+					}
+					else
+					{
+						MessageBox.Show("画像サイズの変更に失敗しました。");
+					}
+				}
+			}
+
+			// Disposeでフォームを解放
+			form.Dispose();
+		}
+
 		private void Undo()
 		{
 			// 一時保存
@@ -1168,13 +1258,32 @@ namespace WindowsFormsApp1
 
 		private void SavePicture()
 		{
-			// 現在時刻を取得
-			DateTime dt = DateTime.Now;
-			string s = dt.ToString("yyyyMMddHHmmss") + @".png";
+			// PictureBoxにある画像の取得
+			if (pbDraw.Image != null) // ある場合
+			{
+				// 現在時刻を取得
+				DateTime dt = DateTime.Now;
+				string s = dt.ToString("yyyyMMddHHmmss") + @".png";
 
-			// PNGで指定先に出力
-			imgNow.Save(Settings.outputPath + @"\" + s,
-				System.Drawing.Imaging.ImageFormat.Png);
+				// PNGで指定先に出力
+				imgNow.Save(Settings.outputPath + @"\" + s,
+					System.Drawing.Imaging.ImageFormat.Png);
+			}
+			else // 無い場合
+			{
+				if (Settings.useEnglish)
+				{
+					MessageBox.Show(
+						"No image on this tool.\r\n" +
+						"First of all, please capture an image.");
+				}
+				else
+				{
+					MessageBox.Show(
+						"画像がありません\r\n" +
+						"先に画像を取り込んでください");
+				}
+			}
 		}
 
 		private void ClosePicture()
@@ -1434,6 +1543,10 @@ namespace WindowsFormsApp1
 					"You can change the color and border of line with the setting window.\r\n" +
 					"[ Ctrl + L ]");
 
+				toolTip1.SetToolTip(btnScale,
+					"You can change the image size.\r\n" +
+					"[ Ctrl + R ]");
+
 				toolTip1.SetToolTip(btnUndo,
 					"Undo your last editing the image.\r\n" +
 					"[ Ctrl + Z ]");
@@ -1487,6 +1600,10 @@ namespace WindowsFormsApp1
 					"画像上でラインを引くモードになります。\r\n" +
 					"色と幅は設定画面で指定できます。\r\n" +
 					"[ Ctrl + L ]");
+
+				toolTip1.SetToolTip(btnScale,
+					"ツール上の画像のサイズを変更します。\r\n" +
+					"[ Ctrl + R ]");
 
 				toolTip1.SetToolTip(btnUndo,
 					"ツール上の画像の編集に対してUndo/Redoします。\r\n" +
@@ -1583,6 +1700,15 @@ namespace WindowsFormsApp1
 			{
 				btnLine.BackgroundImage = Properties.Resources.icon_Line;
 			}
+		}
+
+		private void btnScale_MouseEnter(object sender, EventArgs e)
+		{
+			btnScale.BackgroundImage = Properties.Resources.icon_Scale_On;
+		}
+		private void btnScale_MouseLeave(object sender, EventArgs e)
+		{
+			btnScale.BackgroundImage = Properties.Resources.icon_Scale;
 		}
 
 		private void BtnUndo_MouseEnter(object sender, EventArgs e)
@@ -1806,6 +1932,35 @@ namespace WindowsFormsApp1
 
 				// Clipboardに画像をコピー
 				Clipboard.SetImage(img);
+			}
+
+			// 128*128サイズに縮小してコピー
+			if (e.Control && e.KeyCode == Keys.X)
+			{
+				// 描画先とするImageオブジェクトを作成
+				Bitmap canvas = new Bitmap(128, 128);
+				// ImageオブジェクトのGraphicsオブジェクトを作成
+				Graphics g = Graphics.FromImage(canvas);
+
+				// 矩形選択の背景を取得
+				Image img = GetCaptureImage(new Rectangle(
+									this.Left + 4,
+									this.Top + 4,
+									this.Width - (4 * 2),
+									this.Height - (4 * 2)));
+
+				// 最近傍補間を指定
+				g.InterpolationMode =InterpolationMode.HighQualityBilinear;
+				// 画像を縮小
+				g.DrawImage(img, 0, 0, 128, 128);
+
+				// Clipboardに画像をコピー
+				Clipboard.SetImage(canvas);
+
+				// 解放
+				img.Dispose();
+				g.Dispose();
+				canvas.Dispose();
 			}
 
 			// Ctrlが押されている

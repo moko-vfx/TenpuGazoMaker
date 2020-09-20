@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.pnlTop = new System.Windows.Forms.Panel();
 			this.btnCapture = new System.Windows.Forms.Button();
+			this.btnScale = new System.Windows.Forms.Button();
 			this.btnTrim = new System.Windows.Forms.Button();
 			this.btnView = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
 			// 
 			this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.pnlTop.Controls.Add(this.btnCapture);
+			this.pnlTop.Controls.Add(this.btnScale);
 			this.pnlTop.Controls.Add(this.btnTrim);
 			this.pnlTop.Controls.Add(this.btnView);
 			this.pnlTop.Controls.Add(this.btnSave);
@@ -74,7 +76,7 @@
 			this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlTop.Location = new System.Drawing.Point(0, 0);
 			this.pnlTop.Name = "pnlTop";
-			this.pnlTop.Size = new System.Drawing.Size(419, 40);
+			this.pnlTop.Size = new System.Drawing.Size(444, 40);
 			this.pnlTop.TabIndex = 2;
 			// 
 			// btnCapture
@@ -98,6 +100,28 @@
 			this.btnCapture.Click += new System.EventHandler(this.BtnCapture_Click);
 			this.btnCapture.MouseEnter += new System.EventHandler(this.BtnCapture_MouseEnter);
 			this.btnCapture.MouseLeave += new System.EventHandler(this.BtnCapture_MouseLeave);
+			// 
+			// btnScale
+			// 
+			this.btnScale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnScale.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.icon_Scale;
+			this.btnScale.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btnScale.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+			this.btnScale.FlatAppearance.BorderSize = 0;
+			this.btnScale.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnScale.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
+			this.btnScale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnScale.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.btnScale.Location = new System.Drawing.Point(230, 9);
+			this.btnScale.Name = "btnScale";
+			this.btnScale.Size = new System.Drawing.Size(23, 23);
+			this.btnScale.TabIndex = 0;
+			this.btnScale.TabStop = false;
+			this.toolTip1.SetToolTip(this.btnScale, "画像サイズを縮小します。\r\n[ ショートカットキー：Ctrl + R ]");
+			this.btnScale.UseVisualStyleBackColor = false;
+			this.btnScale.Click += new System.EventHandler(this.btnScale_Click);
+			this.btnScale.MouseEnter += new System.EventHandler(this.btnScale_MouseEnter);
+			this.btnScale.MouseLeave += new System.EventHandler(this.btnScale_MouseLeave);
 			// 
 			// btnTrim
 			// 
@@ -155,7 +179,7 @@
 			this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSave.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnSave.Location = new System.Drawing.Point(302, 9);
+			this.btnSave.Location = new System.Drawing.Point(338, 9);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(23, 23);
 			this.btnSave.TabIndex = 0;
@@ -199,7 +223,7 @@
 			this.btnSetting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSetting.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnSetting.Location = new System.Drawing.Point(374, 9);
+			this.btnSetting.Location = new System.Drawing.Point(410, 9);
 			this.btnSetting.Name = "btnSetting";
 			this.btnSetting.Size = new System.Drawing.Size(23, 23);
 			this.btnSetting.TabIndex = 0;
@@ -221,7 +245,7 @@
 			this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnClose.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnClose.Location = new System.Drawing.Point(338, 9);
+			this.btnClose.Location = new System.Drawing.Point(374, 9);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(23, 23);
 			this.btnClose.TabIndex = 0;
@@ -265,7 +289,7 @@
 			this.btnCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCopy.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnCopy.Location = new System.Drawing.Point(266, 9);
+			this.btnCopy.Location = new System.Drawing.Point(302, 9);
 			this.btnCopy.Name = "btnCopy";
 			this.btnCopy.Size = new System.Drawing.Size(23, 23);
 			this.btnCopy.TabIndex = 0;
@@ -309,7 +333,7 @@
 			this.btnUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
 			this.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnUndo.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.btnUndo.Location = new System.Drawing.Point(230, 9);
+			this.btnUndo.Location = new System.Drawing.Point(266, 9);
 			this.btnUndo.Name = "btnUndo";
 			this.btnUndo.Size = new System.Drawing.Size(23, 23);
 			this.btnUndo.TabIndex = 0;
@@ -330,7 +354,7 @@
 			this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnlBottom.Location = new System.Drawing.Point(0, 40);
 			this.pnlBottom.Name = "pnlBottom";
-			this.pnlBottom.Size = new System.Drawing.Size(419, 159);
+			this.pnlBottom.Size = new System.Drawing.Size(444, 159);
 			this.pnlBottom.TabIndex = 3;
 			this.pnlBottom.DragDrop += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragDrop);
 			this.pnlBottom.DragEnter += new System.Windows.Forms.DragEventHandler(this.PnlBottom_DragEnter);
@@ -381,14 +405,14 @@
 			this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnlInfo.Location = new System.Drawing.Point(0, 199);
 			this.pnlInfo.Name = "pnlInfo";
-			this.pnlInfo.Size = new System.Drawing.Size(419, 22);
+			this.pnlInfo.Size = new System.Drawing.Size(444, 22);
 			this.pnlInfo.TabIndex = 4;
 			// 
 			// pnlColor2
 			// 
 			this.pnlColor2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlColor2.BackColor = System.Drawing.Color.OrangeRed;
-			this.pnlColor2.Location = new System.Drawing.Point(398, 7);
+			this.pnlColor2.Location = new System.Drawing.Point(423, 7);
 			this.pnlColor2.Name = "pnlColor2";
 			this.pnlColor2.Size = new System.Drawing.Size(9, 9);
 			this.pnlColor2.TabIndex = 1;
@@ -397,7 +421,7 @@
 			// 
 			this.pnlColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlColor1.BackColor = System.Drawing.Color.Silver;
-			this.pnlColor1.Location = new System.Drawing.Point(382, 7);
+			this.pnlColor1.Location = new System.Drawing.Point(407, 7);
 			this.pnlColor1.Name = "pnlColor1";
 			this.pnlColor1.Size = new System.Drawing.Size(9, 9);
 			this.pnlColor1.TabIndex = 1;
@@ -407,15 +431,15 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(419, 221);
+			this.ClientSize = new System.Drawing.Size(444, 221);
 			this.Controls.Add(this.pnlBottom);
 			this.Controls.Add(this.pnlTop);
 			this.Controls.Add(this.pnlInfo);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
-			this.MinimumSize = new System.Drawing.Size(435, 100);
+			this.MinimumSize = new System.Drawing.Size(460, 100);
 			this.Name = "Form1";
-			this.Text = "Tenpu Gazo Maker v.1.07";
+			this.Text = "Tenpu Gazo Maker v.1.08";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -453,6 +477,7 @@
 		private System.Windows.Forms.PictureBox pbLine;
 		private System.Windows.Forms.Panel pnlColor2;
 		private System.Windows.Forms.Panel pnlColor1;
+		private System.Windows.Forms.Button btnScale;
 	}
 }
 
