@@ -1966,6 +1966,28 @@ namespace WindowsFormsApp1
 			// Ctrlが押されている
 			if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
 			{
+
+				if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+				{
+					// サイズ変更
+					if (e.KeyCode == Keys.Up)
+					{
+						this.Height -= 10;
+					}
+					if (e.KeyCode == Keys.Down)
+					{
+						this.Height += 10;
+					}
+					if (e.KeyCode == Keys.Left)
+					{
+						this.Width -= 10;
+					}
+					if (e.KeyCode == Keys.Right)
+					{
+						this.Width += 10;
+					}	
+				}
+
 				// サイズ変更
 				if (e.KeyCode == Keys.Up)
 				{
@@ -1986,6 +2008,27 @@ namespace WindowsFormsApp1
 			}
 			else
 			{
+				if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+				{
+					// 移動
+					if (e.KeyCode == Keys.Up)
+					{
+						this.Top -= 10;
+					}
+					if (e.KeyCode == Keys.Down)
+					{
+						this.Top += 10;
+					}
+					if (e.KeyCode == Keys.Left)
+					{
+						this.Left -= 10;
+					}
+					if (e.KeyCode == Keys.Right)
+					{
+						this.Left += 10;
+					}
+				}
+
 				// 移動
 				if (e.KeyCode == Keys.Up)
 				{
